@@ -7,7 +7,11 @@
 *.tgz
 *.gz
 
-lib/
+.gitignore
+.npmignore
+Makefile
+
+src/
 node_modules/
 
 npm-debug.log
