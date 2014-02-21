@@ -25,4 +25,8 @@ test: build
 dist: init build test
 
 pack: dist
-	npm pack
+	@echo "PACKAGE:"
+	@npm pack
+	@echo ""
+	@echo "FILES:"
+	@tar -tzf webp*.tgz
