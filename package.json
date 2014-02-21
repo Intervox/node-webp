@@ -1,0 +1,29 @@
+{
+  "author": "Leonid Beschastny <lbeschastny@iknow.travel>",
+  "name": "webp",
+  "description": "cwebp for node.js",
+  "keywords": [
+    "webp",
+    "compress",
+    "minify",
+    "optimize",
+    "img",
+    "image"
+  ],
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Intervox/node-webp.git"
+  },
+  "main": "lib/webp.js",
+  "scripts": {},
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "dependencies": {
+    "when": "~2.8.0"
+  },
+  "devDependencies": {
+    "coffee-script": ">= 1.3"
+  }
+}
