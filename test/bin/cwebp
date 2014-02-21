@@ -4,7 +4,9 @@ fs = require 'fs'
 minimist = require 'minimist'
 argv = require('minimist')(process.argv.slice(2))
 
-if filename = argv.o
+if argv._[0] is 'FAIL'
+  throw new Error 'FAIL'
+else if filename = argv.o
   data = JSON.stringify argv
   fs.writeFileSync filename, data
   process.exit()

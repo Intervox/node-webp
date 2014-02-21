@@ -13,6 +13,7 @@ module.exports = class Webp
 
   command: (args...) ->
     @_args.push args...
+    return @
 
   _spawn: (args) ->
     {resolve, reject, promise} = When.defer()
@@ -28,6 +29,9 @@ module.exports = class Webp
     promise
 
   write: (outname, next) ->
-    args = [].concat @source, @_args, '-o', outname
-    promise = @_spawn args
+    promise = if outname
+      args = [].concat @source, @_args, '-o', outname
+      @_spawn args
+    else
+      When.reject new Error 'outname in not specified'
     nodefn.bindCallback promise, next
