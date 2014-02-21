@@ -15,7 +15,7 @@
     "type": "git",
     "url": "https://github.com/Intervox/node-webp.git"
   },
-  "main": "lib/webp.js",
+  "main": "lib/index.js",
   "scripts": {},
   "engines": {
     "node": ">= 0.8.0"
