@@ -11,6 +11,7 @@ out.json
 
 lib/
 test/*.js
+test/*/*.js
 node_modules/
 
 npm-debug.log

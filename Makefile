@@ -1,6 +1,8 @@
 TESTS = test/*.js
 REPORTER = spec
 
+PATH := ./test/bin:${PATH}
+
 .PHONY: init clean build test dist pack
 
 init:
@@ -18,7 +20,7 @@ build: clean
 
 test: build
 	@NODE_ENV=test ./node_modules/.bin/mocha \
-		--require should \
+		--require test/utils/env \
 		--reporter $(REPORTER) \
 		--compilers coffee:coffee-script \
 		$(TESTS)
