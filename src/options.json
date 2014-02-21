@@ -1,0 +1,141 @@
+{
+  "quality": {
+    "key": "q",
+    "type": "number",
+    "description": "quality factor (0:small..100:big)"
+  },
+  "alphaQuality": {
+    "key": "alpha_q",
+    "type": "number",
+    "description": "transparency-compression quality (0..100)"
+  },
+  "preset": {
+    "description": "preset setting, one of: default, photo, picture, drawing, icon, text"
+  },
+  "compression": {
+    "key": "m",
+    "type": "number",
+    "description": "compression method (0=fast, 6=slowest)"
+  },
+  "segments": {
+    "type": "number",
+    "description": "number of segments to use (1..4)"
+  },
+  "size": {
+    "type": "number",
+    "description": "target size (in bytes)"
+  },
+  "psnr": {
+    "type": "number",
+    "description": "target PSNR (in dB. typically: 42)"
+  },
+  "inputSize": {
+    "key": "s",
+    "type": [
+      "number",
+      "number"
+    ],
+    "description": "input size (width x height) for YUV"
+  },
+  "sns": {
+    "type": "number",
+    "description": "spatial Noise Shaping (0:off, 100:max)"
+  },
+  "strength": {
+    "key": "f",
+    "type": "number",
+    "description": "filter strength (0=off..100)"
+  },
+  "sharpness": {
+    "type": "number",
+    "description": "filter sharpness (0:most .. 7:least sharp)"
+  },
+  "strong": {
+    "type": "boolean",
+    "exclude": "nostrong",
+    "description": "use strong filter instead of simple (default)"
+  },
+  "nostrong": {
+    "type": "boolean",
+    "exclude": "strong",
+    "aliases": [
+      "simple"
+    ],
+    "description": "use simple filter instead of strong"
+  },
+  "partitionLimit": {
+    "key": "partition_limit",
+    "type": "number",
+    "description": "limit quality to fit the 512k limit on the first partition (0=no degradation ... 100=full)"
+  },
+  "pass": {
+    "type": "number",
+    "description": "analysis pass number (1..10)"
+  },
+  "crop": {
+    "type": [
+      "number",
+      "number",
+      "number",
+      "number"
+    ],
+    "description": "crop picture with the given rectangle"
+  },
+  "resize": {
+    "type": [
+      "number",
+      "number"
+    ],
+    "description": "resize picture (after any cropping)"
+  },
+  "multiThreading": {
+    "key": "mt",
+    "type": "boolean",
+    "description": "use multi-threading if available"
+  },
+  "lowMemory": {
+    "key": "low_memory",
+    "type": "boolean",
+    "description": "reduce memory usage (slower encoding)"
+  },
+  "dump": {
+    "key": "d",
+    "description": "dump the compressed output (PGM file)"
+  },
+  "alphaMethod": {
+    "key": "alpha_method",
+    "type": "number",
+    "description": "transparency-compression method (0..1)"
+  },
+  "alphaFilter": {
+    "key": "alpha_filter",
+    "description": "predictive filtering for alpha plane, one of: none, fast (default) or best"
+  },
+  "alphaCleanup": {
+    "key": "alpha_cleanup",
+    "type": "boolean",
+    "description": "clean RGB values in transparent area"
+  },
+  "blendAlpha": {
+    "key": "blend_alpha",
+    "description": "blend colors against background color expressed as RGB values written in hexadecimal, e.g. 0xc0e0d0 for red=0xc0 green=0xe0 and blue=0xd0"
+  },
+  "noalpha": {
+    "type": "boolean",
+    "description": "discard any transparency information"
+  },
+  "lossless": {
+    "type": "boolean",
+    "description": "encode image losslessly"
+  },
+  "hint": {
+    "description": "specify image characteristics hint, one of: photo, picture or graph"
+  },
+  "metadata": {
+    "description": "comma separated list of metadata to copy from the input to the output if present, valid values: all, none (default), exif, icc, xmp"
+  },
+  "noasm": {
+    "type": "boolean",
+    "description": "disable all assembly optimizations"
+  }
+}

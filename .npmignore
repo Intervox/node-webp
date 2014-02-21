@@ -6,11 +6,11 @@
 *.pid
 *.tgz
 *.gz
-*.json
 
 .gitignore
 .npmignore
 Makefile
+out.json
 
 src/
 test/

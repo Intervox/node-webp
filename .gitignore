@@ -6,7 +6,8 @@
 *.pid
 *.tgz
 *.gz
-*.json
+
+out.json
 
 lib/
 test/*.js

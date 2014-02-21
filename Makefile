@@ -12,8 +12,9 @@ clean:
 	rm -f webp-*.tgz
 
 build: clean
-	coffee -o lib/ -c src/
-	coffee -o test/ -c test/
+	./node_modules/.bin/coffee -o lib/ -c src/
+	./node_modules/.bin/coffee -o test/ -c test/
+	cp -r src/*.json lib/
 
 test: build
 	@NODE_ENV=test ./node_modules/.bin/mocha \
