@@ -6,12 +6,14 @@
 *.pid
 *.tgz
 *.gz
+*.json
 
 .gitignore
 .npmignore
 Makefile
 
 src/
+test/
 node_modules/
 
 npm-debug.log

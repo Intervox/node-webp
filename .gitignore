@@ -6,8 +6,10 @@
 *.pid
 *.tgz
 *.gz
+*.json
 
 lib/
+test/*.js
 node_modules/
 
 npm-debug.log

@@ -1,0 +1,12 @@
+#!/usr/bin/env coffee
+
+fs = require 'fs'
+minimist = require 'minimist'
+argv = require('minimist')(process.argv.slice(2))
+
+if filename = argv.o
+  data = JSON.stringify argv
+  fs.writeFileSync filename, data
+  process.exit()
+else
+  throw new Error 'No output file specified'
