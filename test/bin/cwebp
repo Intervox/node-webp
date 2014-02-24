@@ -1,7 +1,6 @@
 #!/usr/bin/env coffee
 
 fs = require 'fs'
-minimist = require 'minimist'
 argv = require('minimist')(process.argv.slice(2))
 
 if argv._[0] is 'FAIL'

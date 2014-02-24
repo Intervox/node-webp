@@ -12,7 +12,7 @@ proto =
   args: ->
     args = []
     if preset = @_args.preset
-      args.push '-preset', preset
+      args.push '-preset', preset...
     for key, vals of @_args
       continue if key in ['_', 'preset']
       args.push "-#{key}", vals...
@@ -22,14 +22,15 @@ module.exports = (Webp) ->
   for name, method of proto
     Webp::[name] = method
 
-  for name, params of methods
+  for name, params of methods then do (name, params) ->
     {key, type, description, exclude, aliases} = params
     key ||= name
     method = if type is 'boolean'
       (val) ->
-        if val
-          delete @_args[k] for k in exclude
-          @_args[key] = true
+        if val or arguments.length is 0
+          if exclude
+            delete @_args[k] for k in exclude
+          @_args[key] = []
         else
           delete @_args[key]
         return @
@@ -47,7 +48,7 @@ module.exports = (Webp) ->
         @_args[key] = vals
         return @
     method.description = description
-    for alias in [].concat name, aliases
+    for alias in [].concat name, (aliases || [])
       Webp::[alias] = method
-    return
+  return
 
