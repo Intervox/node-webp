@@ -1,4 +1,4 @@
-options = require './options'
+methods = require './methods'
 
 proto =
   command: (args...) ->
@@ -22,7 +22,7 @@ module.exports = (Webp) ->
   for name, method of proto
     Webp::[name] = method
 
-  for name, params of options
+  for name, params of methods
     {key, type, description, exclude, aliases} = params
     key ||= name
     method = if type is 'boolean'
