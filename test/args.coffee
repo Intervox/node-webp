@@ -1,16 +1,13 @@
 {EventEmitter} = require 'events'
 minimist = require 'minimist'
 
-context = {}
-
 {spawn} = child_process = require 'child_process'
-context.spawn = spawn
-child_process.spawn = (cmf, args, opts) ->
-  context.spawn.apply @, arguments
+
 
 Webp = require '../lib'
 methods = require '../lib/methods'
 
+context = {}
 write = (webp, outname) ->
   webp.write(outname).then -> context.argv
 
@@ -45,7 +42,7 @@ describe 'Webp', ->
   describe 'args', ->
 
     before (done) ->
-      context.spawn = mock_spawn
+      child_process.spawn = mock_spawn
       done()
 
     for name, params of methods then do (name, params) ->
@@ -121,5 +118,5 @@ describe 'Webp', ->
           data.__[2].should.be.equal cmd
 
     after (done) ->
-      context.spawn = spawn
+      child_process.spawn = spawn
       done()

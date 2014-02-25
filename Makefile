@@ -23,6 +23,7 @@ test: build
 		--require test/utils/env \
 		--reporter $(REPORTER) \
 		--compilers coffee:coffee-script \
+		--slow 250 \
 		$(TESTS)
 
 dist: init build test
