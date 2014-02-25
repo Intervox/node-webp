@@ -102,10 +102,23 @@ describe 'Webp', ->
                 webp[method]()
               webp[name]()
               write(webp, 'out.json').then (data) ->
-                Object.keys(data).should.have.length 4
                 data.should.have.keys key, '_', '__', 'o'
                 data[key].should.be.ok
 
+    describe 'convention', ->
+
+      it 'should send -preset first', ->
+        filename = Math.random().toString(36)
+        cmd = Math.random().toString(36)
+        webp = new Webp filename
+        webp.quality 123
+        webp.preset cmd
+        webp.size 456
+        write(webp, 'out.json').then (data) ->
+          data.preset.should.be.equal cmd
+          data.__[0].should.be.equal filename
+          data.__[1].should.be.equal '-preset'
+          data.__[2].should.be.equal cmd
 
     after (done) ->
       context.spawn = spawn
