@@ -11,7 +11,7 @@ describe 'Webp', ->
       write(webp, 'out.json').then (data) ->
         throw new Error 'Should not be fulfilled'
       , (err) ->
-        should(err).be.Error
+        err.should.be.Error
 
     it 'should report an internal error', ->
       webp = new Webp 'filename'
@@ -25,13 +25,14 @@ describe 'Webp', ->
       cmd = Math.random().toString(36)
       webp = (new Webp filename).command cmd
       write(webp, 'out.json').then (data) ->
-        should(data._[0]).be.equal filename
-        should(data._[1]).be.equal cmd
+        data.should.have.keys '_', 'o'
+        data._.should.containEql filename
+        data._.should.containEql cmd
 
     it 'should trigger callback on error', (done) ->
       webp = new Webp 'filename'
       webp.write undefined, (err) ->
-        should(err).be.Error
+        err.should.be.Error
         done()
       return
 
@@ -41,6 +42,7 @@ describe 'Webp', ->
       webp.write 'out.json', (err) ->
         should(err).not.be.ok
         data = read 'out.json'
-        should(data._[0]).be.equal filename
+        data.should.have.keys '_', 'o'
+        data._.should.containEql filename
         done()
       return

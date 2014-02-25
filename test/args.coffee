@@ -62,14 +62,50 @@ describe 'Webp', ->
             args = generate_args aliace, type
             webp = (new Webp filename)[name] args...
             write(webp, 'out.json').then (data) ->
-              should(data._[0]).be.equal filename
+              data.should.have.keys key, '_', '__', 'o'
+              data._.should.containEql filename
               if type is 'boolean'
-                should(data[key]).be.equal true
+                data[key].should.be.ok
               else
-                should(data[key]).be.equal args[0]
+                data[key].should.be.equal args[0]
                 for arg in args[1...]
-                  should(data._).containEql arg
-              should(data.__).containEql "-#{key}"
+                  data._.should.containEql arg
+              data.__.should.containEql "-#{key}"
+
+          unless type is 'boolean'
+            it 'should throw type exceprions', ->
+              filename = Math.random().toString(36)
+              args = generate_args aliace, type
+              expect = [].concat(type)[0] || 'string'
+              if expect is 'number'
+                args[0] = String args[0]
+              else
+                args[0] = Math.random()
+              webp = new Webp filename
+              err = new RegExp "^Expected #{expect}, got"
+              (-> webp[name] args...).should.throw(err)
+
+          if Array.isArray type and type.length > 1
+            it 'should throw arguments exceprions', ->
+              filename = Math.random().toString(36)
+              args = generate_args aliace, type
+              args.pop()
+              webp = new Webp filename
+              err = 'Not enough arguments'
+              (-> webp[name] args...).should.throw(err)
+
+          if exclude
+            it 'should handle exclusions', ->
+              filename = Math.random().toString(36)
+              webp = new Webp filename
+              for method in [].concat exclude
+                webp[method]()
+              webp[name]()
+              write(webp, 'out.json').then (data) ->
+                Object.keys(data).should.have.length 4
+                data.should.have.keys key, '_', '__', 'o'
+                data[key].should.be.ok
+
 
     after (done) ->
       context.spawn = spawn

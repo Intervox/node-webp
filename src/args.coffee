@@ -28,8 +28,8 @@ module.exports = (Webp) ->
     method = if type is 'boolean'
       (val) ->
         if val or arguments.length is 0
-          if exclude
-            delete @_args[k] for k in exclude
+          if exclude then for k in [].concat exclude
+            delete @_args[methods[k].key || k]
           @_args[key] = []
         else
           delete @_args[key]
