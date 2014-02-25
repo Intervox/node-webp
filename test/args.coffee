@@ -62,7 +62,6 @@ describe 'Webp', ->
             args = generate_args aliace, type
             webp = (new Webp filename)[name] args...
             write(webp, 'out.json').then (data) ->
-              console.log data
               should(data._[0]).be.equal filename
               if type is 'boolean'
                 should(data[key]).be.equal true
