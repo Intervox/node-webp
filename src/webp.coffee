@@ -1,5 +1,4 @@
 When = require 'when'
-nodefn = require 'when/node/function'
 {spawn} = require 'child_process'
 
 
@@ -24,13 +23,5 @@ module.exports = class Webp
         resolve()
     promise
 
-  write: (outname, next) ->
-    promise = if outname
-      args = [].concat @source, @args(), '-o', outname
-      @_spawn args
-    else
-      When.reject new Error 'outname in not specified'
-    nodefn.bindCallback promise, next
-
-
 require('./args')(Webp)
+require('./io')(Webp)
