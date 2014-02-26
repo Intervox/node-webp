@@ -6,10 +6,10 @@ fs = require 'fs'
 {Buffer} = require 'buffer'
 {Stream} = require 'stream'
 
-tmpFilename = ->
+tmpFilename = (ext = 'tmp') ->
   tmpDir = process.env.TMPDIR || '/tmp'
   base = Math.random().toString(36).slice(2,12)
-  path.resolve tmpDir, "node-webp-#{base}.tmp"
+  path.resolve tmpDir, "node-webp-#{base}.#{ext}"
 
 proto =
   _createFileSource: ->
@@ -19,18 +19,18 @@ proto =
       nodefn.call fs.writeFile, filename, @source
     else if @source instanceof Stream
       deferred = When.defer()
-      stream = fs.createWriteStream filename
+      stream = fs.createWriteStream(filename)
+        .once('error', deferred.reject)
+        .once('finish', deferred.resolve)
       @source.pipe stream
-      stream.on 'error', deferred.reject
-      stream.on 'finish', deferred.resolve
       deferred.promise
     else
       When.reject new Error 'Mailformed source'
     @_tmpFilename = promise.then -> filename
 
-  _cleanup: ->
-    return unless promise = @_tmpFilename
-    delete @_tmpFilename
+  _cleanup: (varname) ->
+    return unless varname and promise = @[varname]
+    delete @[varname]
     When(promise).then (filename) ->
       nodefn.call fs.unlink filename if filename
     .otherwise ->
@@ -49,14 +49,33 @@ proto =
       else
         throw new Error 'outname in not specified'
     .tap =>
-      @_cleanup()
+      @_cleanup '_tmpFilename'
     nodefn.bindCallback promise, next
 
+  _writeTmp: ->
+    return @_tmpOutname if @_tmpOutname
+    outname = tmpFilename 'webp'
+    @_tmpOutname = @write(outname).then -> outname
+
   toBuffer: (next) ->
-    return @
+    promise = @_writeTmp().then (outname) ->
+      nodefn.call fs.readFile, outname
+    .tap =>
+      @_cleanup '_tmpOutname'
+    nodefn.bindCallback promise, next
 
   stream: (next) ->
-    return @
+    done = false
+    cleanup = =>
+      return if done
+      done = true
+      @_cleanup '_tmpOutname'
+    promise = @_writeTmp().then (outname) ->
+      fs.createReadStream(outname)
+        .once('error', cleanup)
+        .once('close', cleanup)
+        .once('end', cleanup)
+    nodefn.bindCallback promise, next
 
 module.exports = (Webp) ->
   for name, method of proto
