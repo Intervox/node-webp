@@ -22,7 +22,6 @@ test: build
 	@NODE_ENV=test ./node_modules/.bin/mocha \
 		--require test/utils/env \
 		--reporter $(REPORTER) \
-		--compilers coffee:coffee-script \
 		--slow 250 \
 		$(TESTS)
 
