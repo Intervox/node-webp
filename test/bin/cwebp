@@ -6,6 +6,7 @@ argv = require('minimist')(process.argv.slice(2))
 if argv._[0] is 'FAIL'
   throw new Error 'FAIL'
 else if filename = argv.o
+  try argv.data = fs.readFileSync argv._[0]
   data = JSON.stringify argv
   fs.writeFileSync filename, data
   process.exit()

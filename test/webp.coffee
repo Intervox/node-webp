@@ -8,14 +8,14 @@ describe 'Webp', ->
 
     it 'should report an external error', ->
       webp = new Webp 'FAIL'
-      write(webp, 'out.json').then (data) ->
+      write(webp, 'out.json').then ->
         throw new Error 'Should not be fulfilled'
       , (err) ->
         err.should.be.Error
 
     it 'should report an internal error', ->
       webp = new Webp 'filename'
-      write(webp, undefined).then (data) ->
+      write(webp, undefined).then ->
         throw new Error 'Should not be fulfilled'
       , (err) ->
         err.should.be.Error
@@ -24,10 +24,10 @@ describe 'Webp', ->
       filename = Math.random().toString(36)
       cmd = Math.random().toString(36)
       webp = (new Webp filename).command cmd
-      write(webp, 'out.json').then (data) ->
-        data.should.have.keys '_', 'o'
-        data._.should.containEql filename
-        data._.should.containEql cmd
+      write(webp, 'out.json').then (argv) ->
+        argv.should.have.keys '_', 'o'
+        argv._.should.containEql filename
+        argv._.should.containEql cmd
 
     it 'should trigger callback on error', (done) ->
       webp = new Webp 'filename'
@@ -41,8 +41,8 @@ describe 'Webp', ->
       webp = new Webp filename
       webp.write 'out.json', (err) ->
         should(err).not.be.ok
-        data = read 'out.json'
-        data.should.have.keys '_', 'o'
-        data._.should.containEql filename
+        argv = read 'out.json'
+        argv.should.have.keys '_', 'o'
+        argv._.should.containEql filename
         done()
       return
