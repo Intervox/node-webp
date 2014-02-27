@@ -46,7 +46,7 @@ describe 'Webp', ->
       done()
 
     for name, params of methods then do (name, params) ->
-      {key, type, exclude, aliases} = params
+      {key, type, exclude, aliases, description} = params
       key ||= name
       aliases ||= []
 
@@ -101,6 +101,12 @@ describe 'Webp', ->
               write(webp, 'out.json').then (data) ->
                 data.should.have.keys key, '_', '__', 'o'
                 data[key].should.be.ok
+
+          it 'should have description', (done) ->
+            filename = Math.random().toString(36)
+            webp = new Webp filename
+            webp[name].should.have.property 'description', description
+            done()
 
     describe 'convention', ->
 
