@@ -4,7 +4,7 @@ Webp = require '../lib'
 
 describe 'Webp', ->
 
-  describe 'write', ->
+  describe 'main', ->
 
     it 'should report an external error', ->
       webp = new Webp 'FAIL'

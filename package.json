@@ -30,6 +30,7 @@
     "minimist": "0.0.8",
     "mocha": "~1.17.1",
     "mocha-as-promised": "~2.0.0",
+    "raw-body": "~1.1.2",
     "should": "~3.1.2"
   }
 }
