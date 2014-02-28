@@ -36,3 +36,6 @@ pack: dist
 	@echo ""
 	@echo "FILES:"
 	@tar -tzf webp*.tgz
+
+publish: dist
+	npm publish
