@@ -9,6 +9,7 @@
 
 .gitignore
 .npmignore
+.travis.yml
 Makefile
 out.json
 
