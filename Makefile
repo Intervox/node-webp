@@ -1,8 +1,6 @@
 TESTS = test/*.js
 REPORTER = spec
 
-PATH := ./test/bin:${PATH}
-
 .PHONY: init clean build test dist pack
 
 init:
@@ -19,11 +17,15 @@ build: clean
 	cp -r src/*.json lib/
 
 test: build
-	@NODE_ENV=test ./node_modules/.bin/mocha \
+	@NODE_ENV=test PATH=./test/bin:${PATH} \
+		./node_modules/.bin/mocha \
 		--require test/utils/env \
 		--reporter $(REPORTER) \
 		--slow 250 \
 		$(TESTS)
+
+validate: build
+	@./test/bin/validate
 
 dist: init build test
 
