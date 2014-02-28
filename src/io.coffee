@@ -21,6 +21,7 @@ proto =
       deferred = When.defer()
       stream = fs.createWriteStream(filename)
         .once('error', deferred.reject)
+        .once('close', deferred.resolve)
         .once('finish', deferred.resolve)
       @source.pipe stream
       deferred.promise
