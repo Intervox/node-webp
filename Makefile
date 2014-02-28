@@ -1,6 +1,8 @@
 TESTS = test/*.js
 REPORTER = spec
 
+PATH := ./node_modules/.bin:${PATH}
+
 .PHONY: init clean build test dist pack
 
 init:
@@ -12,13 +14,12 @@ clean:
 	rm -f webp-*.tgz
 
 build: clean
-	./node_modules/.bin/coffee -o lib/ -c src/
-	./node_modules/.bin/coffee -o test/ -c test/
+	coffee -o lib/ -c src/
+	coffee -o test/ -c test/
 	cp -r src/*.json lib/
 
 test: build
-	@NODE_ENV=test PATH=./test/bin:${PATH} \
-		./node_modules/.bin/mocha \
+	@NODE_ENV=test PATH=./test/bin:${PATH} mocha \
 		--require test/utils/env \
 		--reporter $(REPORTER) \
 		--slow 250 \
