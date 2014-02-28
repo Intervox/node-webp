@@ -107,6 +107,10 @@ webp.stream().then(function(stream) {
 
 `node-webp` provides helper function for most of `cwebp` conversion options. For the full list of available helpers see [methods.json](/src/methods.json) file.
 
+```js
+webp.quality(60);
+```
+
 #### Sending raw command
 
 ```js
