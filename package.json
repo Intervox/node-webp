@@ -1,6 +1,6 @@
 {
   "author": "Leonid Beschastny <lbeschastny@iknow.travel>",
-  "name": "webp",
+  "name": "cwebp",
   "description": "node.js wrapper for cwebp",
   "keywords": [
     "webp",
