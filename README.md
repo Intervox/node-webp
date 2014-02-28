@@ -18,7 +18,7 @@ Node.js wrapper for [cwebp](https://developers.google.com/speed/webp/docs/cwebp)
 ```js
 var Webp = require('cwebp');
 
-webp = new(source);
+var webp = new Webp(source);
 ```
 
 ### Available source types
@@ -28,10 +28,18 @@ When source is a string `node-webp` treats it as a file path.
 ```js
 var Webp = require('cwebp');
 
-webp = new Webp('image.jpeg');
+var webp = new Webp('image.jpeg');
 ```
 
 It also accepts Buffers and Streams.
+
+```js
+var webp = new Webp(buffer);
+```
+
+```js
+var webp = new Webp(stream);
+```
 
 ### Converting image to WebP
 
