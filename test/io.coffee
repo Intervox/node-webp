@@ -45,20 +45,20 @@ describe 'Webp', ->
     describe 'input', ->
 
       it 'should read buffers', ->
-        data = new Buffer Math.random().toString(36)
-        (new Webp data).toBuffer().then (buffer) ->
+        data = Math.random().toString(36)
+        (new Webp new Buffer data).toBuffer().then (buffer) ->
           argv = JSON.parse buffer
           argv.should.have.keys '_', 'o', 'data'
-          argv.data.should.be.eql data.toJSON()
+          argv.data.should.be.eql data
 
       it 'should read streams', ->
-        data = new Buffer Math.random().toString(36)
+        data = Math.random().toString(36)
         stream = new ReadableStreamBuffer
         stream.put data
         (new Webp stream).toBuffer().then (buffer) ->
           argv = JSON.parse buffer
           argv.should.have.keys '_', 'o', 'data'
-          argv.data.should.be.eql data.toJSON()
+          argv.data.should.be.eql data
 
       it 'should throw type error', ->
         (new Webp {}).toBuffer().then ->
