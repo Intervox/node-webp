@@ -37,7 +37,7 @@ pack: dist
 	@npm pack
 	@echo ""
 	@echo "FILES:"
-	@tar -tzf webp*.tgz
+	@tar -tzf cwebp*.tgz
 
 publish: dist
 	npm publish
