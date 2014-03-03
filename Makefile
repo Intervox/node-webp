@@ -22,6 +22,8 @@ test: build
 	@NODE_ENV=test PATH=./test/bin:${PATH} mocha \
 		--require test/utils/env \
 		--reporter $(REPORTER) \
+		--growl \
+		--bail \
 		--slow 250 \
 		$(TESTS)
 

@@ -116,14 +116,3 @@ webp.quality(60);
 ```js
 webp.command('-d', 'dump.pgm');
 ```
-
-
-## Running tests
-
-Running test suite
-
-    make test
-
-Validating WebP installation
-
-    make validate
