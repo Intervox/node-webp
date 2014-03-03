@@ -11,6 +11,12 @@ tmpFilename = (ext = 'tmp') ->
   base = Math.random().toString(36).slice(2,12)
   path.resolve tmpDir, "node-webp-#{base}.#{ext}"
 
+bindCallback = (promise, next) ->
+  if typeof next is 'function'
+    nodefn.bindCallback promise, next
+  else
+    promise
+
 proto =
   _createFileSource: ->
     return @_tmpFilename if @_tmpFilename
@@ -51,7 +57,7 @@ proto =
         throw new Error 'outname in not specified'
     .tap =>
       @_cleanup '_tmpFilename'
-    nodefn.bindCallback promise, next
+    bindCallback promise, next
 
   _writeTmp: ->
     return @_tmpOutname if @_tmpOutname
@@ -63,7 +69,7 @@ proto =
       nodefn.call fs.readFile, outname
     .tap =>
       @_cleanup '_tmpOutname'
-    nodefn.bindCallback promise, next
+    bindCallback promise, next
 
   stream: (next) ->
     done = false
@@ -76,7 +82,7 @@ proto =
         .once('error', cleanup)
         .once('close', cleanup)
         .once('end', cleanup)
-    nodefn.bindCallback promise, next
+    bindCallback promise, next
 
 module.exports = (Webp) ->
   for name, method of proto

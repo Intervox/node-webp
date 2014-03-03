@@ -46,3 +46,7 @@ describe 'Webp', ->
         argv._.should.containEql filename
         done()
       return
+
+    it 'should ignore non-functions passed as callbacks', ->
+      filename = Math.random().toString(36)
+      (new Webp filename).toBuffer 'not a function'
