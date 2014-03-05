@@ -11,7 +11,7 @@ init:
 clean:
 	rm -rf lib/
 	rm -rf test/*.js
-	rm -f webp-*.tgz
+	rm -f cwebp-*.tgz
 
 build: clean
 	coffee -o lib/ -c src/
