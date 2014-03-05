@@ -13,6 +13,7 @@
 Makefile
 out.json
 
+bin/
 src/
 test/
 node_modules/
