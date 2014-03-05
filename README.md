@@ -13,6 +13,14 @@ Node.js wrapper for [cwebp](https://developers.google.com/speed/webp/docs/cwebp)
 
 [WebP](https://developers.google.com/speed/webp/) library should be installed and its binaries should be in `$PATH`.
 
+### Installing WebP
+
+### Getting WebP
+
+You can get WebP source, precompilled binnaries and installation instructions from its [official website](https://developers.google.com/speed/webp/download), or from its [downloads repository](https://code.google.com/p/webp/downloads/list).
+
+Linux users may use [this installation script](bin/install_webp) to authomatically download and install latest WebP binnaries.
+
 ## Usage
 
 ```js
