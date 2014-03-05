@@ -17,7 +17,7 @@ Node.js wrapper for [cwebp](https://developers.google.com/speed/webp/docs/cwebp)
 
 You can get WebP source, precompiled binaries and installation instructions from its [official website](https://developers.google.com/speed/webp/download), or from its [downloads repository](https://code.google.com/p/webp/downloads/list).
 
-Linux users may use [this installation script](bin/install_webp) to authomatically download and install latest WebP binnaries:
+Linux users may use [this installation script](https://github.com/Intervox/node-webp/blob/master/bin/install_webp) to authomatically download and install latest WebP binnaries:
 
     curl -s https://raw.github.com/Intervox/node-webp/master/bin/install_webp | sudo bash
 
@@ -117,7 +117,7 @@ webp.stream().then(function(stream) {
 
 ### Specifying conversion options
 
-`node-webp` provides helper function for most of `cwebp` conversion options. For the full list of available helpers see [methods.json](/src/methods.json) file.
+`node-webp` provides helper function for most of `cwebp` conversion options. For the full list of available helpers see [methods.json](https://github.com/Intervox/node-webp/blob/master/src/methods.json) file.
 
 ```js
 webp.quality(60);
