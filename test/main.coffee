@@ -12,6 +12,9 @@ describe 'Webp', ->
         throw new Error 'Should not be fulfilled'
       , (err) ->
         err.should.be.Error
+        err.should.have.property 'code', 1
+        err.should.have.property 'signal', null
+        err.message.should.match /^Command failed: Error: FAIL/
 
     it 'should report an internal error', ->
       webp = new Webp 'filename'

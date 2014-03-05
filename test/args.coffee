@@ -13,6 +13,7 @@ write = (webp, outname) ->
 
 mock_spawn = (cmd, args) ->
   res = new EventEmitter
+  res.stderr = new EventEmitter
   argv = minimist args.map (s) ->
     if typeof s is 'string'
       s.replace '-', '--'
