@@ -23,6 +23,10 @@ Linux users may use [this installation script](bin/install_webp) to authomatical
 
     curl -s https://raw.github.com/Intervox/node-webp/master/bin/install_webp | sudo bash
 
+MacOS users may install WebP using [homebrew](http://brew.sh/):
+
+    brew install webp
+
 ## Usage
 
 ```js
