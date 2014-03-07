@@ -76,12 +76,24 @@ describe 'Webp', ->
               args = generate_args aliace, type
               expect = [].concat(type)[0] || 'string'
               if expect is 'number'
-                args[0] = String args[0]
+                args[0] = args[0].toString(36)
               else
                 args[0] = Math.random()
               webp = new Webp filename
               err = new RegExp "^Expected #{expect}, got"
               (-> webp[name] args...).should.throw(err)
+
+          if [].concat(type)[0] is 'number'
+            it 'should accept stringified numbers', ->
+              filename = Math.random().toString(36)
+              args = generate_args aliace, type
+              webp = (new Webp filename)[name] args.map(String)...
+              write(webp, 'out.json').then (data) ->
+                data.should.have.keys key, '_', '__', 'o'
+                data._.should.containEql filename
+                for arg in args[1...]
+                  data._.should.containEql arg
+                data[key].should.be.equal args[0]
 
           if Array.isArray type and type.length > 1
             it 'should throw arguments exceprions', ->

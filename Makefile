@@ -23,7 +23,6 @@ test: build
 		--require test/utils/env \
 		--reporter $(REPORTER) \
 		--growl \
-		--bail \
 		--slow 250 \
 		$(TESTS)
 
