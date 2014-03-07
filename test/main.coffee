@@ -1,4 +1,4 @@
-{path: bin} = require 'webp-bin'
+{cwebp: bin} = require 'webp'
 
 {read, write} = require './utils'
 
