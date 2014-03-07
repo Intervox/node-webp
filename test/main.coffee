@@ -1,6 +1,10 @@
+{path: bin} = require 'webp-bin'
+
 {read, write} = require './utils'
 
 Webp = require '../lib'
+
+data = 'iVBORw0KGgoAAAANSUhEUgAAADwAAAA8AQMAAAAAMksxAAAAA1BMVEX/pQDKkkGbAAAAD0lEQVQoz2NgGAWjADsAAAIcAAE79LKOAAAAAElFTkSuQmCC'
 
 describe 'Webp', ->
 
@@ -53,3 +57,17 @@ describe 'Webp', ->
     it 'should ignore non-functions passed as callbacks', ->
       filename = Math.random().toString(36)
       (new Webp filename).toBuffer 'not a function'
+
+    it 'should allow default bin rewriting', ->
+      class Webp2 extends Webp
+        @bin: bin
+      webp = new Webp2 new Buffer data, 'base64'
+      webp.toBuffer().then (buffer) ->
+        buffer.toString('utf8', 0, 4).should.be.equal 'RIFF'
+        buffer.toString('utf8', 8, 12).should.be.equal 'WEBP'
+
+    it 'should accept bin as a constructor option', ->
+      webp = new Webp (new Buffer data, 'base64'), bin
+      webp.toBuffer().then (buffer) ->
+        buffer.toString('utf8', 0, 4).should.be.equal 'RIFF'
+        buffer.toString('utf8', 8, 12).should.be.equal 'WEBP'

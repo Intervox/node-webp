@@ -11,9 +11,7 @@ Node.js wrapper for [cwebp](https://developers.google.com/speed/webp/docs/cwebp)
 
 ### Requirements
 
-[WebP](https://developers.google.com/speed/webp/) library should be installed and its binaries should be in `$PATH`.
-
-### Getting WebP
+### Getting [WebP](https://developers.google.com/speed/webp/)
 
 You can get WebP source, precompiled binaries and installation instructions from its [official website](https://developers.google.com/speed/webp/download), or from its [downloads repository](https://code.google.com/p/webp/downloads/list).
 
@@ -25,10 +23,36 @@ MacOS users may install WebP using [homebrew](http://brew.sh/):
 
     brew install webp
 
+As an alternative you may [install webp as npm module](https://www.npmjs.org/package/webp-bin):
+
+    npm install webp-bin
+
 ## Usage
 
 ```js
 var Webp = require('cwebp');
+
+var webp = new Webp(source);
+```
+
+### Specifying path to cwebp binary
+
+By default `node-webp` looks for `cwebp` binary in your `$PATH`.
+
+#### Specifying path as a constructor option
+
+```js
+var Webp = require('cwebp');
+var binPath = require('webp-bin').path;
+
+var webp = new Webp(source, binPath);
+```
+
+#### Changing default behaviour
+
+```js
+var Webp = require('cwebp');
+Webp.bin = require('webp-bin').path;
 
 var webp = new Webp(source);
 ```

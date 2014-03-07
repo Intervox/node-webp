@@ -32,6 +32,7 @@
     "mocha-as-promised": "~2.0.0",
     "raw-body": "~1.1.2",
     "should": "~3.1.2",
-    "stream-buffers": "~0.2.5"
+    "stream-buffers": "~0.2.5",
+    "webp-bin": "~0.1.4"
   }
 }

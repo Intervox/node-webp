@@ -3,17 +3,20 @@ When = require 'when'
 
 
 module.exports = class Webp
-  constructor: (source) ->
+  @bin: 'cwebp'
+
+  constructor: (source, bin) ->
     unless @ instanceof Webp
-      return new Webp source
+      return new Webp source, bin
 
     @_args = {_: []}
     @source = source
+    @bin = bin || @constructor.bin
 
   _spawn: (args) ->
     {resolve, reject, promise} = When.defer()
     stderr = ''
-    proc = spawn 'cwebp', args
+    proc = spawn @bin, args
     proc.once 'error', reject
     proc.once 'close', onClose = (code, signal) ->
       if code isnt 0 or signal isnt null
