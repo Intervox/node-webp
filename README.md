@@ -9,8 +9,6 @@ Node.js wrapper for [cwebp](https://developers.google.com/speed/webp/docs/cwebp)
 
     npm install cwebp
 
-### Requirements
-
 ### Getting [WebP](https://developers.google.com/speed/webp/)
 
 You can get WebP source, precompiled binaries and installation instructions from its [official website](https://developers.google.com/speed/webp/download), or from its [downloads repository](https://code.google.com/p/webp/downloads/list).
