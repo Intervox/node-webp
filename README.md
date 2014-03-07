@@ -23,9 +23,9 @@ MacOS users may install WebP using [homebrew](http://brew.sh/):
 
     brew install webp
 
-As an alternative you may [install webp as npm module](https://www.npmjs.org/package/webp-bin):
+As an alternative you may [install webp as npm module](https://www.npmjs.org/package/webp):
 
-    npm install webp-bin
+    npm install webp
 
 ## Usage
 
@@ -43,7 +43,7 @@ By default `node-webp` looks for `cwebp` binary in your `$PATH`.
 
 ```js
 var Webp = require('cwebp');
-var binPath = require('webp-bin').path;
+var binPath = require('webp').cwebp;
 
 var webp = new Webp(source, binPath);
 ```
@@ -52,7 +52,7 @@ var webp = new Webp(source, binPath);
 
 ```js
 var Webp = require('cwebp');
-Webp.bin = require('webp-bin').path;
+Webp.bin = require('webp').cwebp;
 
 var webp = new Webp(source);
 ```
