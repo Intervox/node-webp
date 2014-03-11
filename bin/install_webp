@@ -28,8 +28,7 @@ set -e
 curl $URL_BASE$FILENAME --output $FILENAME
 echo "installing..."
 tar --strip-components=1 -zxf $FILENAME
-if [ -d ./bin ]
-then
+if [ -d ./bin ]; then
   cp ./bin/* /usr/bin/
 else
   cp ./cwebp /usr/bin/
