@@ -1,7 +1,6 @@
 #!/bin/bash
 
-if [ `id -u` != "0" ]
-then
+if [ `id -u` != "0" ]; then
   echo "Error: Must run as root"
   exit 1
 fi
