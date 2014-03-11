@@ -28,7 +28,16 @@ set -e
 curl $URL_BASE$FILENAME --output $FILENAME
 echo "installing..."
 tar --strip-components=1 -zxf $FILENAME
-cp ./bin/* /usr/bin/
+if [ -d ./bin ]
+then
+  cp ./bin/* /usr/bin/
+else
+  cp ./cwebp /usr/bin/
+  cp ./dwebp /usr/bin/
+  cp ./gif2webp /usr/bin/
+  cp ./vwebp /usr/bin/
+  cp ./webpmux /usr/bin/
+fi
 cp ./lib/* /usr/lib/
 cp -r ./include/webp /usr/include/
 echo "done!"
