@@ -4,12 +4,14 @@ When = require 'when'
 
 module.exports = class Webp
   @bin: 'cwebp'
+  @verbose: false
 
   constructor: (source, bin) ->
     unless @ instanceof Webp
       return new Webp source, bin
 
     @_args = {_: []}
+    @_args.v = [] if @constructor.verbose
     @source = source
     @bin = bin || @constructor.bin
 

@@ -137,5 +137,10 @@
   "noasm": {
     "type": "boolean",
     "description": "disable all assembly optimizations"
+  },
+  "verbose": {
+    "key": "v",
+    "type": "boolean",
+    "description": "verbose error reporting"
   }
 }

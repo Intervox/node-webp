@@ -5,6 +5,7 @@
 Webp = require '../lib'
 
 data = 'iVBORw0KGgoAAAANSUhEUgAAADwAAAA8AQMAAAAAMksxAAAAA1BMVEX/pQDKkkGbAAAAD0lEQVQoz2NgGAWjADsAAAIcAAE79LKOAAAAAElFTkSuQmCC'
+corrupt = '/9j/4AAQSkZJRgABAQEASABIAAD/7gAOQWRvYmUAZH//Z'
 
 describe 'Webp', ->
 
@@ -71,3 +72,24 @@ describe 'Webp', ->
       webp.toBuffer().then (buffer) ->
         buffer.toString('utf8', 0, 4).should.be.equal 'RIFF'
         buffer.toString('utf8', 8, 12).should.be.equal 'WEBP'
+
+    it 'should report verbose errors', ->
+      webp = new Webp (new Buffer corrupt, 'base64'), bin
+      webp.verbose().toBuffer().then ->
+        throw new Error 'Should not be fulfilled'
+      , (err) ->
+        err.should.be.Error
+        err.message.should.match /Premature end of JPEG file/
+        err.message.should.match /JPEG datastream contains no image/
+
+    it 'should allow default verbose rewriting', ->
+      class Webp3 extends Webp
+        @bin: bin
+        @verbose: true
+      webp = new Webp3 (new Buffer corrupt, 'base64'), bin
+      webp.toBuffer().then ->
+        throw new Error 'Should not be fulfilled'
+      , (err) ->
+        err.should.be.Error
+        err.message.should.match /Premature end of JPEG file/
+        err.message.should.match /JPEG datastream contains no image/

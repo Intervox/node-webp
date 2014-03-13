@@ -150,3 +150,26 @@ webp.quality(60);
 ```js
 webp.command('-d', 'dump.pgm');
 ```
+
+#### Verbose errors reporting
+
+`node-webp` returns any error reported by `cwebp`. By default it uses standard `cwebp` error reporting mode, but it's possible to enable verbose error reporting.
+
+```js
+var Webp = require('cwebp');
+
+new Webp(source).verbose().toBuffer(function (err, res) {
+    // err.message contains verbose error
+});
+```
+
+#### Changing default behaviour
+
+```js
+var Webp = require('cwebp');
+Webp.verbose = true;
+
+new Webp(source).toBuffer(function (err, res) {
+    // err.message contains verbose error
+});
+```
