@@ -1,0 +1,39 @@
+
+0.1.6 / 2014-03-05
+==================
+
+  * Added event listeners cleanup
+  * Fixed tmp files leak after cwebp error processinf Buffer of Stream
+
+0.1.5 / 2014-03-13
+==================
+
+  * Fixed installation script to support old webp versions
+  * Added verbose error reporting
+
+0.1.4 / 2014-03-07
+==================
+
+  * Added support for stringified numbers
+  * Added bin option to specify cwebp path
+
+0.1.3 / 2014-03-05
+==================
+
+  * Improved cwebp errors reporting
+  * Added install_webp script
+
+0.1.2 / 2014-03-03
+==================
+
+  * Fixed crush on non-function passed as a callback
+
+0.1.1 / 2014-02-28
+==================
+
+  * Fixed Readme
+
+0.1.0 / 2014-02-28
+==================
+
+  * Initial release

@@ -173,3 +173,5 @@ new Webp(source).toBuffer(function (err, res) {
     // err.message contains verbose error
 });
 ```
+
+## [Changelog](https://github.com/Intervox/node-webp/blob/master/History.md)
