@@ -30,7 +30,7 @@ module.exports = class Webp
         resolve()
     proc.stderr.on 'data', onErr = (data) ->
       stderr += data
-    promise.tap ->
+    promise.ensure ->
       # Cleanup
       proc.removeListener 'error', reject
       proc.removeListener 'close', onClose

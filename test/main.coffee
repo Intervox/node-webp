@@ -1,4 +1,5 @@
 {cwebp: bin} = require 'webp'
+fs = require 'fs'
 
 {read, write} = require './utils/io'
 
@@ -93,3 +94,19 @@ describe 'Webp', ->
         err.should.be.Error
         err.message.should.match /Premature end of JPEG file/
         err.message.should.match /JPEG datastream contains no image/
+
+    it 'should cleanup tmp files on error', ->
+      filename = ''
+      webp = new Webp (new Buffer corrupt, 'base64'), bin
+      promise = webp.toBuffer()
+      webp._tmpFilename.then (tmpFilename) ->
+        filename = tmpFilename
+        filename.should.not.be.empty
+        fs.existsSync(filename).should.be.true
+        promise
+      .then ->
+        throw new Error 'Should not be fulfilled'
+      , (err) ->
+        err.should.be.Error
+        filename.should.not.be.empty
+        fs.existsSync(filename).should.be.false

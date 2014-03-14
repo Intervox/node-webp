@@ -31,7 +31,7 @@ proto =
         .once('close', resolve)
         .once('finish', resolve)
       @source.pipe stream
-      promise.tap ->
+      promise.ensure ->
         # Cleanup
         stream.removeListener 'error', reject
         stream.removeListener 'close', resolve
@@ -60,7 +60,7 @@ proto =
         @_spawn args
       else
         throw new Error 'outname in not specified'
-    .tap =>
+    .ensure =>
       @_cleanup '_tmpFilename'
     bindCallback promise, next
 
@@ -72,7 +72,7 @@ proto =
   toBuffer: (next) ->
     promise = @_writeTmp().then (outname) ->
       nodefn.call fs.readFile, outname
-    .tap =>
+    .ensure =>
       @_cleanup '_tmpOutname'
     bindCallback promise, next
 
