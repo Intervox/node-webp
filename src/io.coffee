@@ -21,19 +21,24 @@ proto =
   _createFileSource: ->
     return @_tmpFilename if @_tmpFilename
     filename = tmpFilename()
-    promise = if Buffer.isBuffer @source
+    done = if Buffer.isBuffer @source
       nodefn.call fs.writeFile, filename, @source
     else if @source instanceof Stream
+      {resolve, reject, promise} = When.defer()
       deferred = When.defer()
       stream = fs.createWriteStream(filename)
-        .once('error', deferred.reject)
-        .once('close', deferred.resolve)
-        .once('finish', deferred.resolve)
+        .once('error', reject)
+        .once('close', resolve)
+        .once('finish', resolve)
       @source.pipe stream
-      deferred.promise
+      promise.tap ->
+        # Cleanup
+        stream.removeListener 'error', reject
+        stream.removeListener 'close', resolve
+        stream.removeListener 'finish', resolve
     else
       When.reject new Error 'Mailformed source'
-    @_tmpFilename = promise.then -> filename
+    @_tmpFilename = done.then -> filename
 
   _cleanup: (varname) ->
     return unless varname and promise = @[varname]
@@ -72,11 +77,14 @@ proto =
     bindCallback promise, next
 
   stream: (next) ->
-    done = false
-    cleanup = =>
-      return if done
-      done = true
-      @_cleanup '_tmpOutname'
+    _cleanup = @_cleanup.bind @, '_tmpOutname'
+    cleanup = ->
+      return if cleanup.done
+      cleanup.done = true
+      @removeListener 'error', cleanup
+      @removeListener 'close', cleanup
+      @removeListener 'end', cleanup
+      _cleanup()
     promise = @_writeTmp().then (outname) ->
       fs.createReadStream(outname)
         .once('error', cleanup)
