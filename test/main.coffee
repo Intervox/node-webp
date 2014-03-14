@@ -1,6 +1,6 @@
 {cwebp: bin} = require 'webp'
 
-{read, write} = require './utils'
+{read, write} = require './utils/io'
 
 Webp = require '../src'
 
