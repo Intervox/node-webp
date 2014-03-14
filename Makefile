@@ -1,4 +1,4 @@
-TESTS = test/*.js
+TESTS = test/*.coffee
 REPORTER = spec
 
 PATH := ./node_modules/.bin:${PATH}
@@ -10,16 +10,15 @@ init:
 
 clean:
 	rm -rf lib/
-	rm -rf test/*.js
 	rm -f cwebp-*.tgz
 
 build: clean
 	coffee -o lib/ -c src/
-	coffee -o test/ -c test/
-	cp -r src/*.json lib/
+	cp src/*.json lib/
 
-test: build
+test:
 	@NODE_ENV=test PATH=./test/bin:${PATH} mocha \
+		--compilers coffee:coffee-script/register \
 		--require test/utils/env \
 		--reporter $(REPORTER) \
 		--growl \
@@ -29,13 +28,12 @@ test: build
 validate: build
 	@./test/bin/validate
 
-dist: init build test
+dist: init test build
 
 pack: dist
-	@echo "PACKAGE:"
+	@echo "\nPACKAGE:"
 	@npm pack
-	@echo ""
-	@echo "FILES:"
+	@echo "\nFILES:"
 	@tar -tzf cwebp*.tgz
 
 publish: dist

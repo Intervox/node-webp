@@ -7,7 +7,7 @@ nodefn = require 'when/node/function'
 
 {read, write} = require './utils'
 
-Webp = require '../lib'
+Webp = require '../src'
 
 streamToBuffer = nodefn.lift rawBody
 
