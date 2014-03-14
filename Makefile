@@ -5,6 +5,8 @@ PATH := ./node_modules/.bin:${PATH}
 
 .PHONY: init clean build test dist pack
 
+all: pack
+
 init:
 	npm install
 
