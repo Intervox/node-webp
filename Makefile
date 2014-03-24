@@ -1,7 +1,7 @@
 TESTS = test/*.coffee
 REPORTER = spec
 
-PATH := ./node_modules/.bin:${PATH}
+PATH := ./node_modules/.bin:./bin:${PATH}
 
 .PHONY: init clean build test dist pack
 
@@ -36,4 +36,7 @@ pack: dist
 	@tar -tzf cwebp*.tgz
 
 publish: dist
+	version
 	npm publish
+	@git tag `version`
+	@git push origin `version`

@@ -1,0 +1,4 @@
+#!/usr/bin/env coffee
+
+{version} = require '../src'
+console.log "v#{version}"
