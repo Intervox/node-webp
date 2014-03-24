@@ -27,9 +27,6 @@ test:
 		--slow 250 \
 		$(TESTS)
 
-validate: build
-	@./test/bin/validate
-
 dist: init test build
 
 pack: dist

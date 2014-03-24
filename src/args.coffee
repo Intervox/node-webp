@@ -42,7 +42,7 @@ module.exports = (Webp) ->
         vals = []
         for t in type
           val = args.shift()
-          if t is 'number' and Number.isFinite nval = Number val
+          if (t is 'number') and (Number.isFinite nval = Number val)
             val = nval
           if typeof val isnt t
             throw new Error "Expected #{t}, got #{typeof val}"
