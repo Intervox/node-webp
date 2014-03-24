@@ -38,5 +38,5 @@ pack: dist
 publish: dist
 	version
 	npm publish
-	@git tag `version`
+	@git tag -a `version` -m ""
 	@git push origin `version`
