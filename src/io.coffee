@@ -1,7 +1,12 @@
-nodefn = require 'when/node/function'
 When = require 'when'
 path = require 'path'
 fs = require 'fs'
+
+# It should work for any version of when.js
+nodefn = try
+  require 'when/node'
+catch
+  require 'when/node/function'
 
 {Buffer} = require 'buffer'
 {Stream} = require 'stream'

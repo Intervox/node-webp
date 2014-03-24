@@ -1,5 +1,5 @@
 rawBody = require 'raw-body'
-nodefn = require 'when/node/function'
+nodefn = require 'when/node'
 {ReadableStreamBuffer} = require 'stream-buffers'
 
 {Buffer} = require 'buffer'
