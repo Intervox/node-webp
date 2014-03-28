@@ -49,7 +49,7 @@ proto =
     return unless varname and promise = @[varname]
     delete @[varname]
     When(promise).then (filename) ->
-      nodefn.call fs.unlink filename if filename
+      nodefn.call fs.unlink, filename if filename
     .otherwise ->
 
   _fileSource: ->
