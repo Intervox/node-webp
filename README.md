@@ -1,6 +1,6 @@
 node-webp
 =========
-[![Build Status](https://travis-ci.org/Intervox/node-webp.png?branch=master)](https://travis-ci.org/Intervox/node-webp)
+[![Build Status](https://travis-ci.org/Intervox/node-webp.png?branch=latest)](https://travis-ci.org/Intervox/node-webp)
 [![Dependency Status](https://david-dm.org/Intervox/node-webp.png)](https://david-dm.org/Intervox/node-webp)
 
 Node.js wrapper for [cwebp](https://developers.google.com/speed/webp/docs/cwebp) binary
@@ -13,9 +13,9 @@ Node.js wrapper for [cwebp](https://developers.google.com/speed/webp/docs/cwebp)
 
 You can get WebP source, precompiled binaries and installation instructions from its [official website](https://developers.google.com/speed/webp/download), or from its [downloads repository](https://code.google.com/p/webp/downloads/list).
 
-Linux users may use [this installation script](https://github.com/Intervox/node-webp/blob/master/bin/install_webp) to authomatically download and install latest WebP binaries:
+Linux users may use [this installation script](https://github.com/Intervox/node-webp/blob/latest/bin/install_webp) to authomatically download and install latest WebP binaries:
 
-    curl -s https://raw.github.com/Intervox/node-webp/master/bin/install_webp | sudo bash
+    curl -s https://raw.github.com/Intervox/node-webp/latest/bin/install_webp | sudo bash
 
 MacOS users may install WebP using [homebrew](http://brew.sh/):
 
@@ -145,7 +145,7 @@ webp.stream().then(function(stream) {
 
 ### Specifying conversion options
 
-`node-webp` provides helper function for most of `cwebp` conversion options. For the full list of available helpers see [methods.json](https://github.com/Intervox/node-webp/blob/master/src/methods.json) file.
+`node-webp` provides helper function for most of `cwebp` conversion options. For the full list of available helpers see [methods.json](https://github.com/Intervox/node-webp/blob/latest/src/methods.json) file.
 
 ```js
 webp.quality(60);
@@ -180,4 +180,4 @@ new Webp(source).toBuffer(function (err, res) {
 });
 ```
 
-## [Changelog](https://github.com/Intervox/node-webp/blob/master/History.md)
+## [Changelog](https://github.com/Intervox/node-webp/blob/latest/History.md)
