@@ -33,6 +33,12 @@ var Webp = require('cwebp');
 var webp = new Webp(source);
 ```
 
+or
+
+```js
+var webp = Webp(source); // new is optional
+```
+
 ### Specifying path to cwebp binary
 
 By default `node-webp` looks for `cwebp` binary in your `$PATH`.
