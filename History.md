@@ -1,3 +1,8 @@
+0.1.9 / 2014-04-17
+==================
+
+ * Updated deps, allowing wider range of `when` versions
+
 0.1.8 / 2014-03-28
 ==================
 
