@@ -110,3 +110,9 @@ describe 'Webp', ->
         err.should.be.Error
         filename.should.not.be.empty
         fs.existsSync(filename).should.be.false
+
+    it 'should work without new', ->
+      filename = Math.random().toString(36)
+      write(Webp(filename), 'out.json').then (argv) ->
+        argv.should.have.keys '_', 'o'
+        argv._.should.containEql filename
