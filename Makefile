@@ -40,4 +40,4 @@ publish: dist
 	npm publish
 	@git tag -a `version` -m ""
 	@git push origin `version`
-	git push origin +HEAD:latest
+	@git push origin +HEAD:latest
