@@ -42,4 +42,4 @@ echo "done!"
 set +e
 
 cd $CURDIR
-rm -r $TMPDIR
+rm -rf $TMPDIR
