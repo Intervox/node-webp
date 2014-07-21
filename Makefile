@@ -3,7 +3,7 @@ REPORTER = spec
 
 PATH := ./node_modules/.bin:./bin:${PATH}
 
-.PHONY: init clean build test dist pack
+.PHONY: init clean build test dist pack publish
 
 all: pack
 
