@@ -15,7 +15,7 @@ clean:
 	rm -f cwebp-*.tgz
 
 build: clean
-	coffee -o lib/ -c src/
+	coffee -o lib/ -cb src/
 	cp src/*.json lib/
 
 test:
