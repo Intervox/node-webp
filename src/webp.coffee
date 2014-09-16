@@ -4,6 +4,8 @@ methods = require './methods'
 
 
 module.exports = class Webp extends Wrapper
+  mixin this, compile methods
+
   @bin: 'cwebp'
   @verbose: false
 
@@ -11,6 +13,3 @@ module.exports = class Webp extends Wrapper
     unless @ instanceof Webp
       return new Webp source, bin
     super
-
-
-mixin Webp, compile methods

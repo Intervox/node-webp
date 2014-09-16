@@ -5,6 +5,9 @@ When = require 'when'
 
 
 module.exports = class Wrapper
+  mixin this, require './args'
+  mixin this, require './io'
+
   constructor: (source, bin) ->
     @_args = {_: []}
     @_args.v = [] if @constructor.verbose
@@ -31,7 +34,3 @@ module.exports = class Wrapper
       proc.removeListener 'error', reject
       proc.removeListener 'close', onClose
       proc.stderr.removeListener 'close', onErr
-
-
-mixin Wrapper, require './args'
-mixin Wrapper, require './io'
