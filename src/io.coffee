@@ -22,7 +22,7 @@ bindCallback = (promise, next) ->
   else
     promise
 
-proto =
+module.exports =
   _createFileSource: ->
     return @_tmpFilename if @_tmpFilename
     filename = tmpFilename()
@@ -96,7 +96,3 @@ proto =
         .once('close', cleanup)
         .once('end', cleanup)
     bindCallback promise, next
-
-module.exports = (Webp) ->
-  for name, method of proto
-    Webp::[name] = method
