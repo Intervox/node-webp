@@ -4,6 +4,7 @@ methods = require './methods'
 
 
 exports.CWebp = class CWebp extends Wrapper
+  mixin this, compile methods.global
   mixin this, compile methods.cwebp
 
   @bin: 'cwebp'
@@ -16,6 +17,7 @@ exports.CWebp = class CWebp extends Wrapper
 
 
 exports.DWebp = class DWebp extends Wrapper
+  mixin this, compile methods.global
   mixin this, compile methods.dwebp
 
   @bin: 'dwebp'
