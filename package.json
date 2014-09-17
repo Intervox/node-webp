@@ -23,7 +23,7 @@
     "node": ">= 0.8.0"
   },
   "dependencies": {
-    "when": "3.x.x"
+    "when": "3"
   },
   "devDependencies": {
     "coffee-script": "^1.8.0",
