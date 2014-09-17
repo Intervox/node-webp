@@ -46,7 +46,7 @@ describe 'Webp', ->
       child_process.spawn = mock_spawn
       done()
 
-    for name, params of methods then do (name, params) ->
+    for name, params of methods.cwebp then do (name, params) ->
       {key, type, exclude, aliases, description} = params
       key ||= name
       aliases ||= []
