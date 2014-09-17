@@ -12,6 +12,6 @@ module.exports =
     if preset = @_args.preset
       args.push '-preset', preset...
     for key, vals of @_args
-      continue if key in ['_', 'preset']
+      continue if key in ['_', '-', 'preset']
       args.push "-#{key}", vals...
     args.concat @_args._

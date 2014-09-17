@@ -148,34 +148,40 @@
     }
   },
   "dwebp": {
+    "png": {
+      "key": "-",
+      "type": "boolean",
+      "exclude": ["pam", "ppm", "bmp", "tiff", "pgm", "yuv"],
+      "description": "save as PNG format (default)"
+    },
     "pam": {
       "type": "boolean",
-      "exclude": ["ppm", "bmp", "tiff", "pgm", "yuv"],
+      "exclude": ["png", "ppm", "bmp", "tiff", "pgm", "yuv"],
       "description": "save the raw RGBA samples as a color PAM"
     },
     "ppm": {
       "type": "boolean",
-      "exclude": ["pam", "bmp", "tiff", "pgm", "yuv"],
+      "exclude": ["png", "pam", "bmp", "tiff", "pgm", "yuv"],
       "description": "save the raw RGB samples as a color PPM"
     },
     "bmp": {
       "type": "boolean",
-      "exclude": ["pam", "ppm", "tiff", "pgm", "yuv"],
+      "exclude": ["png", "pam", "ppm", "tiff", "pgm", "yuv"],
       "description": "save as uncompressed BMP format"
     },
     "tiff": {
       "type": "boolean",
-      "exclude": ["pam", "ppm", "bmp", "pgm", "yuv"],
+      "exclude": ["png", "pam", "ppm", "bmp", "pgm", "yuv"],
       "description": "save as uncompressed TIFF format"
     },
     "pgm": {
       "type": "boolean",
-      "exclude": ["pam", "ppm", "bmp", "tiff", "yuv"],
-      "description": "save the raw YUV samples as a grayscale PGMfile with IMC4 layout"
+      "exclude": ["png", "pam", "ppm", "bmp", "tiff", "yuv"],
+      "description": "save the raw YUV samples as a grayscale PGM file with IMC4 layout"
     },
     "yuv": {
       "type": "boolean",
-      "exclude": ["pam", "ppm", "bmp", "tiff", "pgm"],
+      "exclude": ["png", "pam", "ppm", "bmp", "tiff", "pgm"],
       "description": "save the raw YUV samples in flat layout"
     },
     "dither": {
