@@ -1,3 +1,8 @@
+0.1.10 / 2014-09-17
+==================
+
+ * Fixed CoffeeScript compillation (removed top-level function wrapping)
+
 0.1.9 / 2014-04-17
 ==================
 
