@@ -167,12 +167,12 @@
     "bmp": {
       "type": "boolean",
       "exclude": ["png", "pam", "ppm", "tiff", "pgm", "yuv"],
-      "description": "save as uncompressed BMP format"
+      "description": "save as uncompressed BMP format (dwebp 4.x or later)"
     },
     "tiff": {
       "type": "boolean",
       "exclude": ["png", "pam", "ppm", "bmp", "pgm", "yuv"],
-      "description": "save as uncompressed TIFF format"
+      "description": "save as uncompressed TIFF format (dwebp 4.x or later)"
     },
     "pgm": {
       "type": "boolean",
@@ -182,11 +182,11 @@
     "yuv": {
       "type": "boolean",
       "exclude": ["png", "pam", "ppm", "bmp", "tiff", "pgm"],
-      "description": "save the raw YUV samples in flat layout"
+      "description": "save the raw YUV samples in flat layout (dwebp 4.x or later)"
     },
     "dither": {
       "type": "number",
-      "description": "dithering strength (in 0..100)"
+      "description": "dithering strength (in 0..100, dwebp 4.x or later)"
     },
     "scale": {
       "type": [
@@ -208,7 +208,7 @@
     },
     "nodither": {
       "type": "boolean",
-      "description": "disable dithering."
+      "description": "disable dithering (dwebp 4.x or later)"
     },
     "alpha": {
       "type": "boolean",
@@ -216,7 +216,7 @@
     },
     "incremental": {
       "type": "boolean",
-      "description": "use incremental decoding (useful for tests)"
+      "description": "use incremental decoding (useful for tests, dwebp 4.x or later)"
     }
   }
 }
