@@ -50,15 +50,19 @@ test_methods = (Webp, name, {key, type, exclude, aliases, description}) ->
         args = generate_args aliace, type
         webp = (new Webp filename)[name] args...
         write(webp, 'out.json').then (data) ->
-          data.should.have.keys key, '_', '__', 'o'
-          data._.should.containEql filename
-          if type is 'boolean'
-            data[key].should.be.ok
+          if key is '-'
+            data.should.have.keys '_', '__', 'o'
+            data.__.should.not.containEql "-#{key}"
           else
-            data[key].should.be.equal args[0]
-            for arg in args[1...]
-              data._.should.containEql arg
-          data.__.should.containEql "-#{key}"
+            data.should.have.keys key, '_', '__', 'o'
+            if type is 'boolean'
+              data[key].should.be.ok
+            else
+              data[key].should.be.equal args[0]
+              for arg in args[1...]
+                data._.should.containEql arg
+            data.__.should.containEql "-#{key}"
+          data._.should.containEql filename
 
       unless type is 'boolean'
         it 'should throw type exceprions', ->
@@ -102,8 +106,11 @@ test_methods = (Webp, name, {key, type, exclude, aliases, description}) ->
             webp[method]()
           webp[name]()
           write(webp, 'out.json').then (data) ->
-            data.should.have.keys key, '_', '__', 'o'
-            data[key].should.be.ok
+            if key is '-'
+              data.should.have.keys '_', '__', 'o'
+            else
+              data.should.have.keys key, '_', '__', 'o'
+              data[key].should.be.ok
 
       it 'should have description', (done) ->
         filename = Math.random().toString(36)
