@@ -1,6 +1,8 @@
 should = require 'should'
+run = require './run'
 
 Object.defineProperty global, 'should', value: should
+Object.defineProperty global, 'run_tests', value: run
 
 {spawn} = child_process = require 'child_process'
 

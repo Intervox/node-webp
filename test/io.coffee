@@ -7,11 +7,9 @@ nodefn = require 'when/node'
 
 {read, write} = require './utils/io'
 
-Webp = require '../src'
-
 streamToBuffer = nodefn.lift rawBody
 
-describe 'Webp', ->
+run_tests (Webp) ->
 
   describe 'io', ->
 
