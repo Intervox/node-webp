@@ -10,7 +10,6 @@ module.exports = class Wrapper
 
   constructor: (source, bin) ->
     @_args = {_: []}
-    @_args.v = [] if @constructor.verbose
     @source = source
     @bin = bin || @constructor.bin
 

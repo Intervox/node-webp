@@ -13,7 +13,11 @@ exports.CWebp = class CWebp extends Wrapper
   constructor: (source, bin) ->
     unless @ instanceof CWebp
       return new CWebp source, bin
+
     super
+
+    if @constructor.verbose
+      @_args.v = []
 
 
 exports.DWebp = class DWebp extends Wrapper
@@ -21,7 +25,6 @@ exports.DWebp = class DWebp extends Wrapper
   mixin this, compile methods.dwebp
 
   @bin: 'dwebp'
-  @verbose: false
 
   constructor: (source, bin) ->
     unless @ instanceof DWebp
