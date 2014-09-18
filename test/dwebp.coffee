@@ -6,7 +6,7 @@ fs = require 'fs'
 data = 'UklGRlAAAABXRUJQVlA4IEQAAAAQBACdASo8ADwAPpFIoEwlpCMiIggAsBIJaQB2APwAACBupqAK8QtyAAD+7JeP//rK/mV/Mr/fI///G7cYb70AAAAAAA'
 corrupt = '/9j/4AAQSkZJRgABAQEASABIAAD/7gAOQWRvYmUAZH//Z'
 
-describe 'Webp', ->
+describe 'dwebp', ->
 
   describe 'main', ->
 
