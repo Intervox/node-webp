@@ -130,7 +130,7 @@ test_convention = (Webp) ->
         data.__[2].should.be.equal cmd
 
 
-run_tests (Webp, name) ->
+run_tests (Webp, cname) ->
 
   describe 'methods', ->
 
@@ -141,7 +141,7 @@ run_tests (Webp, name) ->
     for name, params of methods.global
       test_methods Webp, name, params
 
-    for name, params of methods[name]
+    for name, params of methods[cname]
       test_methods Webp, name, params
 
     if name is 'cwebp'
