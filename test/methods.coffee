@@ -132,7 +132,7 @@ test_convention = (Webp) ->
 
 run_tests (Webp, name) ->
 
-  describe 'args', ->
+  describe 'methods', ->
 
     before (done) ->
       child_process.spawn = mock_spawn
