@@ -1,8 +1,12 @@
-module.exports = (handler) ->
-  {CWebp, DWebp} = require './mock'
-
-  describe 'CWebp', ->
+run = (handler, {CWebp, DWebp}) ->
+  describe 'cwebp', ->
     handler CWebp, 'cwebp'
 
-  describe 'DWebp', ->
+  describe 'dwebp', ->
     handler DWebp, 'dwebp'
+
+exports.run = (handler) ->
+  run handler, require '../../src'
+
+exports.run_mocked = (handler) ->
+  run handler, require './mock'

@@ -1,11 +1,9 @@
-fs = require 'fs'
-
 {DWebp} = require '../src'
 data = require './utils/data'
 
 describe 'dwebp', ->
 
-  describe 'main', ->
+  describe 'dwebp', ->
 
     it 'should decode images', ->
       webp = new DWebp data.webp
@@ -39,28 +37,3 @@ describe 'dwebp', ->
         err.should.be.Error
         err.message.should.match /Status: 3/
         err.message.should.match /\(BITSTREAM_ERROR\)/
-
-    it 'should cleanup tmp files on error', ->
-      filename = ''
-      webp = new DWebp data.corrupt
-      promise = webp.toBuffer()
-      webp._tmpFilename.then (tmpFilename) ->
-        filename = tmpFilename
-        filename.should.not.be.empty
-        fs.existsSync(filename).should.be.true
-        promise
-      .then ->
-        throw new Error 'Should not be fulfilled'
-      , (err) ->
-        err.should.be.Error
-        filename.should.not.be.empty
-        fs.existsSync(filename).should.be.false
-
-    it 'should support filenames', ->
-      webp = new DWebp '-filename'
-      webp.toBuffer().then ->
-        throw new Error 'Should not be fulfilled'
-      , (err) ->
-        err.should.be.Error
-        err.message.should.match /cannot open input file/i
-        err.message.should.match /'-filename'/

@@ -1,10 +1,11 @@
 should = require 'should'
-run_mocked = require './run'
+{run, run_mocked} = require './run'
 
 defineGlobal = (key, value) ->
   Object.defineProperty global, key, {value}
 
 defineGlobal 'should', should
+defineGlobal 'run_tests', run
 defineGlobal 'run_mocked', run_mocked
 
 {spawn} = child_process = require 'child_process'
