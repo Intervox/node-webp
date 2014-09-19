@@ -33,7 +33,12 @@ to automatically download and install latest WebP binaries:
 
     curl -s https://raw.github.com/Intervox/node-webp/latest/bin/install_webp | sudo bash
 
-MacOS users may install WebP using [homebrew][homebrew]:
+MacOS users may install WebP using [MacPorts][macports]:
+
+    sudo port selfupdate
+    sudo port install webp
+
+or [homebrew][homebrew]:
 
     brew install webp
 
@@ -41,12 +46,16 @@ As an alternative you may [install webp `0.3.x` as npm module][get_webp.4]:
 
     npm install webp
 
+If none of it suit your needs, you may [build the WebP utilities yourself][get_webp.5].
+
 <!-- TODO: Add warning not to use old webp versions -->
 
   [get_webp.1]: https://developers.google.com/speed/webp/download
   [get_webp.2]: http://downloads.webmproject.org/releases/webp/index.html
   [get_webp.3]: https://github.com/Intervox/node-webp/blob/latest/bin/install_webp
   [get_webp.4]: https://www.npmjs.org/package/webp
+  [get_webp.5]: https://developers.google.com/speed/webp/docs/compiling
+  [macports]: http://guide.macports.org/
   [homebrew]: http://brew.sh/
 
 ## Usage
