@@ -1,47 +1,82 @@
+[<img src="https://developers.google.com/speed/webp/images/webplogo.png" alt="WebP logo" align="right" />][webp]
+
+  [webp]: https://developers.google.com/speed/webp/
+
+[![Build Status][travis_icon]][travis]
+[![Dependency Status][david_icon]][david]
+
+  [travis_icon]: https://travis-ci.org/Intervox/node-webp.png?branch=latest
+  [david_icon]: https://david-dm.org/Intervox/node-webp.png
+  [travis]: https://travis-ci.org/Intervox/node-webp
+  [david]: https://david-dm.org/Intervox/node-webp
+
 node-webp
 =========
-[![Build Status](https://travis-ci.org/Intervox/node-webp.png?branch=latest)](https://travis-ci.org/Intervox/node-webp)
-[![Dependency Status](https://david-dm.org/Intervox/node-webp.png)](https://david-dm.org/Intervox/node-webp)
 
-Node.js wrapper for [cwebp](https://developers.google.com/speed/webp/docs/cwebp) binary
+Node.js wrapper for [cwebp][cwebp] and [dwebp][dwebp] binaries
+from [WebP][webp] image processing utility.
+
+  [cwebp]: https://developers.google.com/speed/webp/docs/cwebp
+  [dwebp]: https://developers.google.com/speed/webp/docs/dwebp
 
 ## Installation
 
     npm install cwebp
 
-### Getting [WebP](https://developers.google.com/speed/webp/)
+### Getting [WebP][webp]
 
-You can get WebP source, precompiled binaries and installation instructions from its [official website](https://developers.google.com/speed/webp/download), or from its [downloads repository](https://code.google.com/p/webp/downloads/list).
+You can get WebP source, pre-compiled binaries and installation instructions
+from its [official website][get_webp.1], or from its [downloads repository][get_webp.2].
 
-Linux users may use [this installation script](https://github.com/Intervox/node-webp/blob/latest/bin/install_webp) to authomatically download and install latest WebP binaries:
+Linux users may use [this installation script][get_webp.3]
+to automatically download and install latest WebP binaries:
 
     curl -s https://raw.github.com/Intervox/node-webp/latest/bin/install_webp | sudo bash
 
-MacOS users may install WebP using [homebrew](http://brew.sh/):
+MacOS users may install WebP using [homebrew][homebrew]:
 
     brew install webp
 
-As an alternative you may [install webp as npm module](https://www.npmjs.org/package/webp):
+As an alternative you may [install webp `0.3.x` as npm module][get_webp.4]:
 
     npm install webp
+
+<!-- TODO: Add warning not to use old webp versions -->
+
+  [get_webp.1]: https://developers.google.com/speed/webp/download
+  [get_webp.2]: https://code.google.com/p/webp/downloads/list
+  [get_webp.3]: https://github.com/Intervox/node-webp/blob/latest/bin/install_webp
+  [get_webp.4]: https://www.npmjs.org/package/webp
+  [homebrew]: http://brew.sh/
 
 ## Usage
 
 ```js
-var Webp = require('cwebp');
+var CWebp = require('cwebp').CWebp;
+var DWebp = require('dwebp').DWebp;
 
-var webp = new Webp(source);
+var encoder = new CWebp(source_image);
+var decoder = new DWebp(source_webp);
 ```
 
 or
 
 ```js
-var webp = Webp(source); // new is optional
+// new is optional
+var encoder = CWebp(source_image);
+var decoder = DWebp(source_webp);
+```
+
+or
+
+```js
+// Backward-compatibility with cwebp@0.1.x
+var CWebp = require('cwebp');
 ```
 
 ### Specifying path to cwebp binary
 
-By default `node-webp` looks for `cwebp` binary in your `$PATH`.
+By default `node-webp` looks for `cwebp` and `dwebp` binary in your `$PATH`.
 
 #### Specifying path as a constructor option
 
@@ -55,59 +90,76 @@ var webp = new Webp(source, binPath);
 #### Changing default behaviour
 
 ```js
-var Webp = require('cwebp');
-Webp.bin = require('webp').cwebp;
+var CWebp = require('cwebp').CWebp;
+CWebp.bin = require('webp').cwebp;
 
-var webp = new Webp(source);
+var encoder = new CWebp(source);
 ```
+
+```js
+var DWebp = require('cwebp').DWebp;
+DWebp.bin = require('webp').dwebp;
+
+var decoder = new DWebp(source);
+```
+
+**N.B.:** `webp` npm module provide old `webp 0.3.x` binaries.
 
 ### Available source types
 
 When source is a string `node-webp` treats it as a file path.
 
 ```js
-var Webp = require('cwebp');
+var CWebp = require('cwebp').CWebp;
+var DWebp = require('dwebp').DWebp;
 
-var webp = new Webp('image.jpeg');
+var encoder = new CWebp('original.jpeg');
+var decoder = new DWebp('converted.webp');
 ```
 
 It also accepts Buffers and Streams.
 
 ```js
-var webp = new Webp(buffer);
+var encoder = new CWebp(buffer);
 ```
 
 ```js
-var webp = new Webp(stream);
+var decoder = new DWebp(stream);
 ```
 
-### Converting image to WebP
+### Encoding and decodind WebP images
 
 ```js
-webp.write('image.webp', function(err) {
-    console.log('converted');
+encoder.write('image.webp', function(err) {
+    console.log(err || 'encoded successfully');
 });
 ```
 
-#### Getting converted image as a Buffer
+```js
+decoder.write('image.png', function(err) {
+    console.log(err || 'decoded successfully');
+});
+```
+
+#### Getting output image as a Buffer
 
 ```js
-webp.toBuffer(function(err, buffer) {
+decoder.toBuffer(function(err, buffer) {
     // ...
 });
 ```
 
-#### Getting converted image as a readable Stream
+#### Getting output image as a readable Stream
 
 ```js
-webp.stream(function(err, stream) {
+encoder.stream(function(err, stream) {
     // ...
 });
 ```
 
 ### Working with Streams and Buffers
 
-Currently WebP library have no inner support for streaming, so it only works with files.
+Currently WebP library have no inner support for streaming, it only works with files.
 
 So, when Buffer or Stream is used `node-webp` creates a temporary file to store its content.
 
@@ -117,67 +169,80 @@ It removes all temporary files after conversion, but before triggering a callbac
 
 So, converting Stream into a Buffer will cause two temporary files to be created and then removed.
 
-It also means that `node-webp` will start listening for new data in the source stream only when `.write()`, `.stream()` or `.toBuffer()` is called.
+It also means that `node-webp` will start listening for new data in the source stream
+only when `.write()`, `.stream()` or `.toBuffer()` is called.
 
 ### Using promises
 
 `node-webp` supports A+ promises.
 
 ```js
-webp.write('image.webp').then(function() {
+encoder.write('image.webp').then(function() {
     // ...
 });
 ```
 
 ```js
-webp.toBuffer().then(function(buffer) {
+encoder.toBuffer().then(function(buffer) {
     // ...
 });
 ```
 
 ```js
-webp.stream().then(function(stream) {
+decoder.stream().then(function(stream) {
     // ...
 });
 ```
 
-`node-webp` use [when](https://github.com/cujojs/when) library.
+`node-webp` uses [when.js][when] library.
+
+  [when]: https://github.com/cujojs/when
 
 ### Specifying conversion options
 
-`node-webp` provides helper function for most of `cwebp` conversion options. For the full list of available helpers see [methods.json](https://github.com/Intervox/node-webp/blob/latest/src/methods.json) file.
+`node-webp` provides helper functions for most of `cwebp` and `dwebp` conversion options.
+For the full list of available helpers see [methods.json][methods] file.
 
 ```js
-webp.quality(60);
+encoder.quality(60);
+decoder.tiff();
 ```
+
+  [methods]: https://github.com/Intervox/node-webp/blob/latest/src/methods.json
 
 #### Sending raw command
 
 ```js
-webp.command('-d', 'dump.pgm');
+encoder.command('-d', 'dump.pgm');
 ```
 
 #### Verbose errors reporting
 
-`node-webp` returns any error reported by `cwebp`. By default it uses standard `cwebp` error reporting mode, but it's possible to enable verbose error reporting.
+`node-webp` returns any error reported by `cwebp` or `dwebp`.
+By default it uses standard error reporting mode,
+but it's possible to enable `cwebp` verbose error reporting.
 
 ```js
-var Webp = require('cwebp');
+var CWebp = require('cwebp').CWebp;
 
-new Webp(source).verbose().toBuffer(function (err, res) {
+new CWebp(source).verbose().toBuffer(function (err, res) {
     // err.message contains verbose error
 });
 ```
+
+`dwebp` don't support verbose error reporting.
 
 #### Changing default behaviour
 
 ```js
-var Webp = require('cwebp');
-Webp.verbose = true;
+var CWebp = require('cwebp').CWebp;
+CWebp.verbose = true;
 
-new Webp(source).toBuffer(function (err, res) {
+new CWebp(source).toBuffer(function (err, res) {
     // err.message contains verbose error
 });
 ```
 
-## [Changelog](https://github.com/Intervox/node-webp/blob/latest/History.md)
+## [Changelog][history]
+
+  [history]: https://github.com/Intervox/node-webp/blob/latest/History.md
