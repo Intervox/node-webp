@@ -10,7 +10,7 @@
     "img",
     "image"
   ],
-  "version": "0.2.0-alpha",
+  "version": "0.2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Intervox/node-webp.git"

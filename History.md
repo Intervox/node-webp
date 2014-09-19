@@ -1,7 +1,16 @@
+0.2.0 / 2014-09-19
+==================
+
+ * Added dwebp support [#1]
+ * Updated installation script to install `webp 0.4.1`
+
+
+  [#1]: https://github.com/Intervox/node-webp/issues/1
+
 0.1.10 / 2014-09-17
 ==================
 
- * Fixed CoffeeScript compillation (removed top-level function wrapping)
+ * Fixed CoffeeScript compilation (removed top-level function wrapping)
 
 0.1.9 / 2014-04-17
 ==================
