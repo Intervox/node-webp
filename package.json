@@ -31,6 +31,7 @@
     "mocha": "~1.21.4",
     "raw-body": "~1.3.0",
     "should": "~4.0.4",
-    "stream-buffers": "~1.0.0"
+    "stream-buffers": "~1.0.0",
+    "webp": "0.0.4"
   }
 }

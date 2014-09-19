@@ -15,20 +15,6 @@ describe 'dwebp', ->
       webp.toBuffer().then (buffer) ->
         buffer.toString('utf8', 1, 4).should.be.equal 'PNG'
 
-    it 'should allow default bin rewriting', ->
-      class Webp2 extends DWebp
-        @bin: 'cwebp'
-      webp = new Webp2 data.jpeg
-      webp.toBuffer().then (buffer) ->
-        buffer.toString('utf8', 0, 4).should.be.equal 'RIFF'
-        buffer.toString('utf8', 8, 12).should.be.equal 'WEBP'
-
-    it 'should accept bin as a constructor option', ->
-      webp = new DWebp data.jpeg, 'cwebp'
-      webp.toBuffer().then (buffer) ->
-        buffer.toString('utf8', 0, 4).should.be.equal 'RIFF'
-        buffer.toString('utf8', 8, 12).should.be.equal 'WEBP'
-
     it 'should report errors', ->
       webp = new DWebp data.corrupt
       webp.toBuffer().then ->

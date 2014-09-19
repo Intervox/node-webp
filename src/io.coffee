@@ -58,17 +58,37 @@ module.exports =
     else
       @_createFileSource()
 
+  _write: (source, outname) ->
+    outname ||= '-'
+    stdin = (typeof source isnt 'string')
+    stdout = outname is '-'
+    args = [].concat @args(), [
+      '-o', outname
+      '--', (if stdin then '-' else source)
+    ]
+    unless stdin
+      @_spawn args, stdin, stdout
+    else if Buffer.isBuffer source
+      promise = @_spawn args, stdin, stdout
+      promise.stdin.end source
+      promise
+    else if source instanceof Stream
+      promise = @_spawn args, stdin, stdout
+      source.pipe promise.stdin
+      promise
+    else
+      When.reject new Error 'Mailformed source'
+
   write: (outname, next) ->
-    promise = When(@_fileSource()).then (filename) =>
-      if outname
-        @_spawn [].concat @args(), [
-          '-o', outname
-          '--', filename
-        ]
-      else
-        throw new Error 'outname in not specified'
-    .ensure =>
-      @_cleanup '_tmpFilename'
+    promise = unless outname
+      When.reject new Error 'outname in not specified'
+    else if @_stdin
+      @_write @source, outname
+    else
+      When(@_fileSource()).then (filename) =>
+        @_write filename, outname
+      .ensure =>
+        @_cleanup '_tmpFilename'
     bindCallback promise, next
 
   _writeTmp: ->

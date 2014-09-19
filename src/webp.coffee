@@ -29,4 +29,7 @@ exports.DWebp = class DWebp extends Wrapper
   constructor: (source, bin) ->
     unless @ instanceof DWebp
       return new DWebp source, bin
+
     super
+
+    @_stdin = true
