@@ -19,7 +19,7 @@ build: clean
 	cp src/*.json lib/
 
 test:
-	@NODE_ENV=test PATH=./test/bin:${PATH} mocha \
+	@NODE_ENV=test mocha \
 		--compilers coffee:coffee-script/register \
 		--require test/utils/env \
 		--reporter $(REPORTER) \

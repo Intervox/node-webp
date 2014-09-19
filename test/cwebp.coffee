@@ -1,31 +1,38 @@
-{cwebp: bin} = require 'webp'
 fs = require 'fs'
 
 {CWebp} = require '../src'
-
-data = 'iVBORw0KGgoAAAANSUhEUgAAADwAAAA8AQMAAAAAMksxAAAAA1BMVEX/pQDKkkGbAAAAD0lEQVQoz2NgGAWjADsAAAIcAAE79LKOAAAAAElFTkSuQmCC'
-corrupt = '/9j/4AAQSkZJRgABAQEASABIAAD/7gAOQWRvYmUAZH//Z'
+data = require './utils/data'
 
 describe 'cwebp', ->
 
   describe 'main', ->
 
+    it 'should encode images', ->
+      webp = new CWebp data.jpeg
+      webp.toBuffer().then (buffer) ->
+        buffer.toString('utf8', 0, 4).should.be.equal 'RIFF'
+        buffer.toString('utf8', 8, 12).should.be.equal 'WEBP'
+
+    it 'should work without new', ->
+      webp = CWebp data.jpeg
+      webp.toBuffer().then (buffer) ->
+        buffer.toString('utf8', 0, 4).should.be.equal 'RIFF'
+        buffer.toString('utf8', 8, 12).should.be.equal 'WEBP'
+
     it 'should allow default bin rewriting', ->
       class Webp2 extends CWebp
-        @bin: bin
-      webp = new Webp2 new Buffer data, 'base64'
+        @bin: 'dwebp'
+      webp = new Webp2 data.webp
       webp.toBuffer().then (buffer) ->
-        buffer.toString('utf8', 0, 4).should.be.equal 'RIFF'
-        buffer.toString('utf8', 8, 12).should.be.equal 'WEBP'
+        buffer.toString('utf8', 1, 4).should.be.equal 'PNG'
 
     it 'should accept bin as a constructor option', ->
-      webp = new CWebp (new Buffer data, 'base64'), bin
+      webp = new CWebp data.webp, 'dwebp'
       webp.toBuffer().then (buffer) ->
-        buffer.toString('utf8', 0, 4).should.be.equal 'RIFF'
-        buffer.toString('utf8', 8, 12).should.be.equal 'WEBP'
+        buffer.toString('utf8', 1, 4).should.be.equal 'PNG'
 
     it 'should report verbose errors', ->
-      webp = new CWebp (new Buffer corrupt, 'base64'), bin
+      webp = new CWebp data.corrupt
       webp.verbose().toBuffer().then ->
         throw new Error 'Should not be fulfilled'
       , (err) ->
@@ -35,9 +42,8 @@ describe 'cwebp', ->
 
     it 'should allow default verbose rewriting', ->
       class Webp3 extends CWebp
-        @bin: bin
         @verbose: true
-      webp = new Webp3 (new Buffer corrupt, 'base64'), bin
+      webp = new Webp3 data.corrupt
       webp.toBuffer().then ->
         throw new Error 'Should not be fulfilled'
       , (err) ->
@@ -47,7 +53,7 @@ describe 'cwebp', ->
 
     it 'should cleanup tmp files on error', ->
       filename = ''
-      webp = new CWebp (new Buffer corrupt, 'base64'), bin
+      webp = new CWebp data.corrupt
       promise = webp.toBuffer()
       webp._tmpFilename.then (tmpFilename) ->
         filename = tmpFilename

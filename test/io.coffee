@@ -9,7 +9,7 @@ nodefn = require 'when/node'
 
 streamToBuffer = nodefn.lift rawBody
 
-run_tests (Webp) ->
+run_mocked (Webp) ->
 
   describe 'io', ->
 

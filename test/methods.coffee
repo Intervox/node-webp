@@ -137,7 +137,7 @@ test_convention = (Webp) ->
         data.__[2].should.be.equal cmd
 
 
-run_tests (Webp, cname) ->
+run_mocked (Webp, cname) ->
 
   describe 'methods', ->
 

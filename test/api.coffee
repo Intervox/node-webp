@@ -1,6 +1,6 @@
 {read, write} = require './utils/io'
 
-run_tests (Webp) ->
+run_mocked (Webp) ->
 
   describe 'api', ->
 
@@ -51,9 +51,3 @@ run_tests (Webp) ->
     it 'should ignore non-functions passed as callbacks', ->
       filename = Math.random().toString(36)
       (new Webp filename).toBuffer 'not a function'
-
-    it 'should work without new', ->
-      filename = Math.random().toString(36)
-      write(Webp(filename), 'out.json').then (argv) ->
-        argv.should.have.keys '_', 'o'
-        argv._.should.containEql filename

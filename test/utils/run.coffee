@@ -1,5 +1,5 @@
 module.exports = (handler) ->
-  {CWebp, DWebp} = Webp = require '../../src'
+  {CWebp, DWebp} = require './mock'
 
   describe 'CWebp', ->
     handler CWebp, 'cwebp'
