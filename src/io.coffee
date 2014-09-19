@@ -61,8 +61,10 @@ module.exports =
   write: (outname, next) ->
     promise = When(@_fileSource()).then (filename) =>
       if outname
-        args = [].concat filename, @args(), '-o', outname
-        @_spawn args
+        @_spawn [].concat @args(), [
+          '-o', outname
+          '--', filename
+        ]
       else
         throw new Error 'outname in not specified'
     .ensure =>

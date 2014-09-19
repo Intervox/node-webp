@@ -66,3 +66,12 @@ describe 'cwebp', ->
         err.should.be.Error
         filename.should.not.be.empty
         fs.existsSync(filename).should.be.false
+
+    it 'should support filenames', ->
+      webp = new CWebp '-filename'
+      webp.toBuffer().then ->
+        throw new Error 'Should not be fulfilled'
+      , (err) ->
+        err.should.be.Error
+        err.message.should.match /cannot open input file/i
+        err.message.should.match /'-filename'/
