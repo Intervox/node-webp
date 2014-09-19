@@ -4,4 +4,4 @@ node_js:
   - "0.10"
   - "0.8"
 before_install:
-  - sudo bash ./bin/install_webp
+  - sudo make install

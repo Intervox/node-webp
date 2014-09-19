@@ -3,12 +3,15 @@ REPORTER = spec
 
 PATH := ./node_modules/.bin:./bin:${PATH}
 
-.PHONY: init clean build test dist pack publish
+.PHONY: init install clean build test dist pack publish
 
 all: pack
 
 init:
 	npm install
+
+install:
+	@./bin/install_webp
 
 clean:
 	rm -rf lib/
