@@ -38,6 +38,7 @@ module.exports = class Wrapper
       proc.removeListener 'error', reject
       proc.removeListener 'close', onClose
       proc.stderr.removeListener 'close', onErr
-    promise.stdin = proc.stdin if stdin
-    promise.stdout = proc.stdout if stdout
-    return promise
+    res = {promise}
+    res.stdin = proc.stdin if stdin
+    res.stdout = proc.stdout if stdout
+    return res

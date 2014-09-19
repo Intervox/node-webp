@@ -11,8 +11,8 @@ run_tests (Webp) ->
       class Webp2 extends Webp
         @bin: bin
       webp = new Webp2
-      promise = webp._spawn ['-version'], false, true
-      promise.stdout.on 'data', (data) ->
+      {promise, stdout} = webp._spawn ['-version'], false, true
+      stdout.on 'data', (data) ->
         stdout += data
       promise.then  ->
         stdout.should.match /0\.3\.1/
@@ -20,8 +20,8 @@ run_tests (Webp) ->
     it 'should accept bin as a constructor option', ->
       stdout = ''
       webp = new Webp null, bin
-      promise = webp._spawn ['-version'], false, true
-      promise.stdout.on 'data', (data) ->
+      {promise, stdout} = webp._spawn ['-version'], false, true
+      stdout.on 'data', (data) ->
         stdout += data
       promise.then  ->
         stdout.should.match /0\.3\.1/

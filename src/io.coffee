@@ -69,24 +69,24 @@ module.exports =
     unless stdin
       @_spawn args, stdin, stdout
     else if Buffer.isBuffer source
-      promise = @_spawn args, stdin, stdout
-      promise.stdin.end source
-      promise
+      res = @_spawn args, stdin, stdout
+      res.stdin.end source
+      res
     else if source instanceof Stream
-      promise = @_spawn args, stdin, stdout
-      source.pipe promise.stdin
-      promise
+      res = @_spawn args, stdin, stdout
+      source.pipe res.stdin
+      res
     else
-      When.reject new Error 'Mailformed source'
+      promise: When.reject new Error 'Mailformed source'
 
   write: (outname, next) ->
     promise = unless outname
       When.reject new Error 'outname in not specified'
     else if @_stdin
-      @_write @source, outname
+      (@_write @source, outname).promise
     else
       When(@_fileSource()).then (filename) =>
-        @_write filename, outname
+        (@_write filename, outname).promise
       .ensure =>
         @_cleanup '_tmpFilename'
     bindCallback promise, next
@@ -104,17 +104,18 @@ module.exports =
     bindCallback promise, next
 
   stream: (next) ->
-    _cleanup = @_cleanup.bind @, '_tmpOutname'
-    cleanup = ->
-      return if cleanup.done
-      cleanup.done = true
-      @removeListener 'error', cleanup
-      @removeListener 'close', cleanup
-      @removeListener 'end', cleanup
-      _cleanup()
-    promise = @_writeTmp().then (outname) ->
-      fs.createReadStream(outname)
-        .once('error', cleanup)
-        .once('close', cleanup)
-        .once('end', cleanup)
+    {resolve, reject, promise} = When.defer()
+    if @_stdin
+      res = @_write @source, '-'
+      res.promise.otherwise reject
+      res.stdout.on 'readable', ->
+        resolve res.stdout
+    else
+      When(@_fileSource()).then (filename) =>
+        res = @_write filename, '-'
+        res.promise.otherwise reject
+        res.stdout.on 'readable', ->
+          resolve res.stdout
+        res.promise.ensure =>
+          @_cleanup '_tmpFilename'
     bindCallback promise, next
