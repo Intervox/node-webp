@@ -104,12 +104,12 @@ module.exports =
     bindCallback promise, next
 
   _stream: (source) ->
-    {resolve, reject, promise} = When.defer()
     res = @_write source, '-'
-    res.promise.otherwise reject
-    res.stdout.on 'readable', ->
-      resolve res.stdout
-    promise
+    if res.stdout
+      When.resolve res.stdout
+    else
+      res.promise.then ->
+        throw new Error 'Can\'t read stdout'
 
   stream: (next) ->
     promise = if @_stdin
@@ -117,6 +117,7 @@ module.exports =
     else
       When(@_fileSource()).then (filename) =>
         @_stream filename
-      .ensure =>
-        @_cleanup '_tmpFilename'
+      .tap (stream) =>
+        stream.once 'close', =>
+          @_cleanup '_tmpFilename'
     bindCallback promise, next
