@@ -1,3 +1,4 @@
+rawBody = require 'raw-body'
 When = require 'when'
 path = require 'path'
 fs = require 'fs'
@@ -11,6 +12,7 @@ catch
 {Buffer} = require 'buffer'
 {Stream, PassThrough} = require 'stream'
 
+streamToBuffer = nodefn.lift rawBody
 PassThrough ||= require 'through'
 
 tmpFilename = (ext = 'tmp') ->
@@ -93,17 +95,8 @@ module.exports =
         @_cleanup '_tmpFilename'
     bindCallback promise, next
 
-  _writeTmp: ->
-    return @_tmpOutname if @_tmpOutname
-    outname = tmpFilename 'webp'
-    @_tmpOutname = @write(outname).then -> outname
-
   toBuffer: (next) ->
-    promise = @_writeTmp().then (outname) ->
-      nodefn.call fs.readFile, outname
-    .ensure =>
-      @_cleanup '_tmpOutname'
-    bindCallback promise, next
+    bindCallback (streamToBuffer @stream()), next
 
   _stream: (source, outstream) ->
     res = @_write source, '-'
