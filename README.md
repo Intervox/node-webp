@@ -23,9 +23,9 @@ from [WebP][webp] image processing utility.
 
     npm install cwebp
 
-### Getting [WebP][webp]
+### Getting latest version of [WebP][webp]
 
-You can get WebP source, pre-compiled binaries and installation instructions
+You can get latest WebP source, pre-compiled binaries and installation instructions
 from its [official website][get_webp.1], or from its [downloads repository][get_webp.2].
 
 Linux users may use [this installation script][get_webp.3]
@@ -38,17 +38,20 @@ MacOS users may install WebP using [MacPorts][macports]:
     sudo port selfupdate
     sudo port install webp
 
-or [homebrew][homebrew]:
+If none of it suit your needs, you may [build the WebP utilities yourself][get_webp.5].
+
+### Alternative ways to install [WebP][webp]
+
+MacOS users may install webp `0.4.0` using [homebrew][homebrew]:
 
     brew install webp
 
-As an alternative you may [install webp `0.3.x` as npm module][get_webp.4]:
+You may also [install webp `0.3.x` as npm module][get_webp.4]:
 
     npm install webp
 
-If none of it suit your needs, you may [build the WebP utilities yourself][get_webp.5].
-
-<!-- TODO: Add warning not to use old webp versions -->
+**IMPORTANT:** Old versions of WebP (prior to `0.4.1`)
+are not fully compatible with the latest `node-webp` version.
 
   [get_webp.1]: https://developers.google.com/speed/webp/download
   [get_webp.2]: http://downloads.webmproject.org/releases/webp/index.html
@@ -136,6 +139,9 @@ var encoder = new CWebp(buffer);
 var decoder = new DWebp(stream);
 ```
 
+Note that `node-webp` will start listening to the data in a source stream
+only when `.write()`, `.stream()` or `.toBuffer()` is called.
+
 ### Encoding and decodind WebP images
 
 ```js
@@ -161,25 +167,41 @@ decoder.toBuffer(function(err, buffer) {
 #### Getting output image as a readable Stream
 
 ```js
-encoder.stream(function(err, stream) {
-    // ...
+var stream = encoder.stream();
+
+stream.pipe(destination);
+stream.on('error', function(err) {
+  // something bad happened
 });
 ```
 
-### Working with Streams and Buffers
+### Working with Streams
 
-Currently WebP library have no inner support for streaming, it only works with files.
+Different versions of WebP have different level of streaming support.
 
-So, when Buffer or Stream is used `node-webp` creates a temporary file to store its content.
+So, using latest `node-webp` version with old WebP binaries
+may break some of its streaming features.
 
-To prevent leaks `node-webp` creates temporary files only when `.write()`, `.stream()` or `.toBuffer()` is called.
+Check the following table to
 
-It removes all temporary files after conversion, but before triggering a callback.
+| Feature                | WebP `0.4.1`                          | Older WebP versions         | node-webp `1.x`                | node-webp `0.1.x`                     |
+| ---------------------- | ------------------------------------- | --------------------------- | ------------------------------ | ------------------------------------- |
+| cwebp stdin streaming  | <font color="red">no</font>           | <font color="red">no</font> | <font color="blue">mock</font> | <font color="blue">mock</font>        |
+| cwebp stdout streaming | <font color="darkgreen">native</font> | <font color="red">no</font> | <font color="blue">mock</font> | <font color="darkgreen">native</font> |
+| dwebp stdin streaming  | <font color="darkgreen">native</font> | <font color="red">no</font> | <font color="blue">mock</font> | <font color="darkgreen">native</font> |
+| dwebp stdout streaming | <font color="darkgreen">native</font> | <font color="red">no</font> | <font color="blue">mock</font> | <font color="darkgreen">native</font> |
 
-So, converting Stream into a Buffer will cause two temporary files to be created and then removed.
+<font color="blue">mock</font> means that `node-webp` acts as if the feature is supported,
+mocking it using temporary files.
 
-It also means that `node-webp` will start listening for new data in the source stream
-only when `.write()`, `.stream()` or `.toBuffer()` is called.
+So, converting Stream into a Buffer with node-webp `0.x` will cause
+two temporary files to be created and then removed
+(one to store input stream, and another to read output buffer from).
+
+**IMPORTANT:** If you're using old version of WebP, please,
+use [node-webp `0.1.x`][v0.1.10].
+
+  [v0.1.10]: https://github.com/Intervox/node-webp/tree/v0.1.10
 
 ### Using promises
 
