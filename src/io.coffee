@@ -9,7 +9,9 @@ catch
   require 'when/node/function'
 
 {Buffer} = require 'buffer'
-{Stream} = require 'stream'
+{Stream, PassThrough} = require 'stream'
+
+PassThrough ||= require 'through'
 
 tmpFilename = (ext = 'tmp') ->
   tmpDir = process.env.TMPDIR || '/tmp'
@@ -103,21 +105,19 @@ module.exports =
       @_cleanup '_tmpOutname'
     bindCallback promise, next
 
-  _stream: (source) ->
+  _stream: (source, outstream) ->
     res = @_write source, '-'
-    if res.stdout
-      When.resolve res.stdout
-    else
-      res.promise.then ->
-        throw new Error 'Can\'t read stdout'
+    res.stdout.pipe outstream
+    res.promise.otherwise (err) ->
+      outstream.emit 'error', err
+    res.stdout
 
-  stream: (next) ->
-    promise = if @_stdin
-      @_stream @source
+  stream: ->
+    res = new PassThrough()
+    if @_stdin
+      @_stream @source, res
     else
       When(@_fileSource()).then (filename) =>
-        @_stream filename
-      .tap (stream) =>
-        stream.once 'close', =>
+        (@_stream filename, res).once 'close', =>
           @_cleanup '_tmpFilename'
-    bindCallback promise, next
+    res

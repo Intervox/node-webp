@@ -26,17 +26,13 @@ describe 'round trip', ->
 
     it 'should round trip jpeg image', ->
       encoder = new CWebp data.jpeg
-      encoder.stream().then (stream) ->
-        decoder = new DWebp stream
-        decoder.toBuffer()
-      .then (buffer) ->
+      decoder = new DWebp encoder.stream()
+      decoder.toBuffer().then (buffer) ->
         buffer.toString('utf8', 1, 4).should.be.equal 'PNG'
 
     it 'should round trip webp image', ->
       decoder = new DWebp data.webp
-      decoder.stream().then (stream) ->
-        encoder = new CWebp stream
-        encoder.toBuffer()
-      .then (buffer) ->
+      encoder = new CWebp decoder.stream()
+      encoder.toBuffer().then (buffer) ->
         buffer.toString('utf8', 0, 4).should.be.equal 'RIFF'
         buffer.toString('utf8', 8, 12).should.be.equal 'WEBP'

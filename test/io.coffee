@@ -32,10 +32,9 @@ run_mocked (Webp) ->
 
       it 'should return stream', ->
         filename = Math.random().toString(36)
-        (new Webp filename).stream().then (stream) ->
-          stream.should.be.instanceof Stream
-          streamToBuffer stream
-        .then (buffer) ->
+        stream = (new Webp filename).stream()
+        stream.should.be.instanceof Stream
+        streamToBuffer(stream).then (buffer) ->
           argv = JSON.parse buffer
           argv.should.have.keys '_', 'o'
           argv._.should.containEql filename
