@@ -189,12 +189,12 @@ stream.on('error', function(err) {
 
 Different versions of WebP have different level of streaming support:
 
-| Feature                | WebP `0.4.1` | Older WebP versions | node-webp `1.x` | node-webp `0.1.x` |
-| ---------------------- | ------------ | ------------------- | --------------- | ----------------- |
-| cwebp stdin streaming  | **_no_**     | **_no_**            | **_mock_**      | **_mock_**        |
-| cwebp stdout streaming | **_native_** | **_no_**            | **_mock_**      | **_native_**      |
-| dwebp stdin streaming  | **_native_** | **_no_**            | **_mock_**      | **_native_**      |
-| dwebp stdout streaming | **_native_** | **_no_**            | **_mock_**      | **_native_**      |
+| Feature                | Older WebP versions | WebP `0.4.1` | node-webp `1.x` | node-webp `0.1.x` |
+| ---------------------- | ------------------- | ------------ | --------------- | ----------------- |
+| cwebp stdin streaming  | **_no_**            | **_no_**     | **_mock_**      | **_mock_**        |
+| cwebp stdout streaming | **_no_**            | **_native_** | **_mock_**      | **_native_**      |
+| dwebp stdin streaming  | **_no_**            | **_native_** | **_mock_**      | **_native_**      |
+| dwebp stdout streaming | **_no_**            | **_native_** | **_mock_**      | **_native_**      |
 
 **_mock_** means that `node-webp` acts as if the feature is supported,
 mocking it using temporary files.
