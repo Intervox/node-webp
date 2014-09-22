@@ -1,16 +1,22 @@
 1.0.0-alpha / 2014-09-22
 ==================
 
- * Added native streaming support #2
- * Added support for input files, prefixed with `-` symbol #2
+ * Added native streaming support [#2]
+ * Added support for input files, prefixed with `-` symbol [#2]
  * **BREAKING:** Changed `.stream()` behavior
  * **BREAKING:** Old versions of WebP (prior to `0.4.1`) are no longer supported
+
+
+  [#2]: https://github.com/Intervox/node-webp/issues/2
 
 0.2.0 / 2014-09-19
 ==================
 
- * Added dwebp support #1
+ * Added dwebp support [#1]
  * Updated installation script to install `webp 0.4.1`
+
+
+  [#1]: https://github.com/Intervox/node-webp/issues/1
 
 0.1.10 / 2014-09-17
 ==================
