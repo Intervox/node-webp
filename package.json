@@ -23,7 +23,7 @@
     "node": ">= 0.8.0"
   },
   "dependencies": {
-    "through": "^2.3.6",
+    "through": "~2.3",
     "when": "3"
   },
   "devDependencies": {
