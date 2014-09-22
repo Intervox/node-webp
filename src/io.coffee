@@ -107,17 +107,26 @@ module.exports =
 
   _stream: (source, outstream) ->
     res = @_write source, '-'
-    res.stdout.pipe outstream
-    res.promise.otherwise (err) ->
+    if (piped = res.stdout?)
+      res.stdout.pipe outstream, end: false
+    res.promise.then ->
+      unless piped
+        throw new Error 'Failed to pipe stdout'
+      outstream.end()
+    .otherwise (err) ->
       outstream.emit 'error', err
-    res.stdout
 
   stream: ->
     res = new PassThrough()
     if @_stdin
       @_stream @source, res
     else
+      res.once 'end', =>
+        @_cleanup '_tmpFilename'
+      res.once 'error', =>
+        @_cleanup '_tmpFilename'
       When(@_fileSource()).then (filename) =>
-        (@_stream filename, res).once 'close', =>
-          @_cleanup '_tmpFilename'
+        @_stream filename, res
+      .otherwise (err) ->
+        res.emit 'error', err
     res
