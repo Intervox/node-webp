@@ -50,9 +50,16 @@ You may also [install webp `0.3.x` as npm module][get_webp.4]:
 
     npm install webp
 
-**IMPORTANT:** Old versions of WebP (prior to `0.4.1`)
-are not fully compatible with the latest `node-webp` version.
-Check [this compatibility table][working-with-streams] for more info
+### Important: Using old WebP versions
+
+Old versions of WebP (prior to `0.4.1`)
+are not compatible with the latest `node-webp` version.
+
+If you're using old version of WebP, please,
+use [node-webp `0.1.x`][v0.1.10].
+
+Check [this section][working-with-streams] for more info about
+new streaming features of the latest WebP version.
 
   [get_webp.1]: https://developers.google.com/speed/webp/download
   [get_webp.2]: http://downloads.webmproject.org/releases/webp/index.html
@@ -62,6 +69,7 @@ Check [this compatibility table][working-with-streams] for more info
   [macports]: http://guide.macports.org/
   [homebrew]: http://brew.sh/
   [working-with-streams]: #working-with-streams
+  [v0.1.10]: https://github.com/Intervox/node-webp/tree/v0.1.10
 
 ## Usage
 
@@ -179,12 +187,7 @@ stream.on('error', function(err) {
 
 ### Working with Streams
 
-Different versions of WebP have different level of streaming support.
-
-So, using latest `node-webp` version with old WebP binaries
-may break some of its streaming features.
-
-Check the following table to
+Different versions of WebP have different level of streaming support:
 
 | Feature                | WebP `0.4.1` | Older WebP versions | node-webp `1.x` | node-webp `0.1.x` |
 | ---------------------- | ------------ | ------------------- | --------------- | ----------------- |
@@ -206,8 +209,6 @@ while **_mock_** streaming will work with any version of WebP.
 
 **IMPORTANT:** If you're using old version of WebP, please,
 use [node-webp `0.1.x`][v0.1.10].
-
-  [v0.1.10]: https://github.com/Intervox/node-webp/tree/v0.1.10
 
 ### Using promises
 
