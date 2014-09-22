@@ -8,6 +8,7 @@ read = (argv, next) ->
     rawBody process.stdin, {encoding: 'utf8'}, (err, data) ->
       argv.data = data unless err
       next()
+    process.stdin.resume()
   else
     try argv.data = String fs.readFileSync source
     next()
