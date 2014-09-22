@@ -52,6 +52,7 @@ You may also [install webp `0.3.x` as npm module][get_webp.4]:
 
 **IMPORTANT:** Old versions of WebP (prior to `0.4.1`)
 are not fully compatible with the latest `node-webp` version.
+Check [this compatibility table][working-with-streams] for more info
 
   [get_webp.1]: https://developers.google.com/speed/webp/download
   [get_webp.2]: http://downloads.webmproject.org/releases/webp/index.html
@@ -60,6 +61,7 @@ are not fully compatible with the latest `node-webp` version.
   [get_webp.5]: https://developers.google.com/speed/webp/docs/compiling
   [macports]: http://guide.macports.org/
   [homebrew]: http://brew.sh/
+  [working-with-streams]: #working-with-streams
 
 ## Usage
 
@@ -184,19 +186,23 @@ may break some of its streaming features.
 
 Check the following table to
 
-| Feature                | WebP `0.4.1`                          | Older WebP versions         | node-webp `1.x`                | node-webp `0.1.x`                     |
-| ---------------------- | ------------------------------------- | --------------------------- | ------------------------------ | ------------------------------------- |
-| cwebp stdin streaming  | <font color="red">no</font>           | <font color="red">no</font> | <font color="blue">mock</font> | <font color="blue">mock</font>        |
-| cwebp stdout streaming | <font color="darkgreen">native</font> | <font color="red">no</font> | <font color="blue">mock</font> | <font color="darkgreen">native</font> |
-| dwebp stdin streaming  | <font color="darkgreen">native</font> | <font color="red">no</font> | <font color="blue">mock</font> | <font color="darkgreen">native</font> |
-| dwebp stdout streaming | <font color="darkgreen">native</font> | <font color="red">no</font> | <font color="blue">mock</font> | <font color="darkgreen">native</font> |
+| Feature                | WebP `0.4.1` | Older WebP versions | node-webp `1.x` | node-webp `0.1.x` |
+| ---------------------- | ------------ | ------------------- | --------------- | ----------------- |
+| cwebp stdin streaming  | **_no_**     | **_no_**            | **_mock_**      | **_mock_**        |
+| cwebp stdout streaming | **_native_** | **_no_**            | **_mock_**      | **_native_**      |
+| dwebp stdin streaming  | **_native_** | **_no_**            | **_mock_**      | **_native_**      |
+| dwebp stdout streaming | **_native_** | **_no_**            | **_mock_**      | **_native_**      |
 
-<font color="blue">mock</font> means that `node-webp` acts as if the feature is supported,
+**_mock_** means that `node-webp` acts as if the feature is supported,
 mocking it using temporary files.
 
 So, converting Stream into a Buffer with node-webp `0.x` will cause
 two temporary files to be created and then removed
 (one to store input stream, and another to read output buffer from).
+
+Note that `node-webp` **_native_** streaming will work only
+if your WebP version have **_native_** support for the corresponding stream,
+while **_mock_** streaming will work with any version of WebP.
 
 **IMPORTANT:** If you're using old version of WebP, please,
 use [node-webp `0.1.x`][v0.1.10].
