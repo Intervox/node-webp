@@ -49,9 +49,9 @@ module.exports =
       When.reject new Error 'Mailformed source'
     @_tmpFilename = done.then -> filename
 
-  _cleanup: (varname) ->
-    return unless varname and promise = @[varname]
-    delete @[varname]
+  _cleanup: ->
+    return unless promise = @_tmpFilename
+    delete @_tmpFilename
     When(promise).then (filename) ->
       nodefn.call fs.unlink, filename if filename
     .otherwise ->
@@ -91,8 +91,7 @@ module.exports =
     else
       When(@_fileSource()).then (filename) =>
         (@_write filename, outname).promise
-      .ensure =>
-        @_cleanup '_tmpFilename'
+      .ensure => @_cleanup()
     bindCallback promise, next
 
   toBuffer: (next) ->
@@ -114,10 +113,8 @@ module.exports =
     if @_stdin
       @_stream @source, res
     else
-      res.once 'end', =>
-        @_cleanup '_tmpFilename'
-      res.once 'error', =>
-        @_cleanup '_tmpFilename'
+      res.once 'end', => @_cleanup()
+      res.once 'error', => @_cleanup()
       When(@_fileSource()).then (filename) =>
         @_stream filename, res
       .otherwise (err) ->
