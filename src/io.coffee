@@ -103,19 +103,20 @@ module.exports =
       @_cleanup '_tmpOutname'
     bindCallback promise, next
 
-  stream: (next) ->
+  _stream: (source) ->
     {resolve, reject, promise} = When.defer()
-    if @_stdin
-      res = @_write @source, '-'
-      res.promise.otherwise reject
-      res.stdout.on 'readable', ->
-        resolve res.stdout
+    res = @_write source, '-'
+    res.promise.otherwise reject
+    res.stdout.on 'readable', ->
+      resolve res.stdout
+    promise
+
+  stream: (next) ->
+    promise = if @_stdin
+      @_stream @source
     else
       When(@_fileSource()).then (filename) =>
-        res = @_write filename, '-'
-        res.promise.otherwise reject
-        res.stdout.on 'readable', ->
-          resolve res.stdout
-        res.promise.ensure =>
-          @_cleanup '_tmpFilename'
+        @_stream filename
+      .ensure =>
+        @_cleanup '_tmpFilename'
     bindCallback promise, next
