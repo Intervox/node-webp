@@ -1,4 +1,4 @@
-1.0.0-alpha / 2014-09-22
+1.0.0 / 2014-09-22
 ==================
 
  * Added native streaming support [#2]
