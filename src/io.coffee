@@ -99,11 +99,12 @@ module.exports =
 
   _stream: (source, outstream) ->
     res = @_write source, '-'
-    if (piped = res.stdout?)
+    if res.stdout
       res.stdout.pipe outstream, end: false
-    res.promise.then ->
-      unless piped
-        throw new Error 'Failed to pipe stdout'
+      res.promise
+    else
+      res.promise.then ->
+        When.reject new Error 'Failed to pipe stdout'
 
   stream: ->
     res = new PassThrough()
