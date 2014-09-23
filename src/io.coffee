@@ -104,19 +104,17 @@ module.exports =
     res.promise.then ->
       unless piped
         throw new Error 'Failed to pipe stdout'
-      outstream.end()
-    .otherwise (err) ->
-      outstream.emit 'error', err
 
   stream: ->
     res = new PassThrough()
-    if @_stdin
+    promise = if @_stdin
       @_stream @source, res
     else
-      res.once 'end', => @_cleanup()
-      res.once 'error', => @_cleanup()
       When(@_fileSource()).then (filename) =>
         @_stream filename, res
-      .otherwise (err) ->
-        res.emit 'error', err
+      .ensure => @_cleanup()
+    promise.then ->
+      outstream.end()
+    .otherwise (err) ->
+      outstream.emit 'error', err
     res
