@@ -48,7 +48,7 @@ describe 'cwebp', ->
         filename.should.not.be.empty
         fs.existsSync(filename).should.be.true
         promise
-      .delay(1).then ->
+      .then ->
         throw new Error 'Should not be fulfilled'
       , (err) ->
         err.should.be.Error
