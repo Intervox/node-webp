@@ -114,7 +114,7 @@ module.exports =
         @_stream filename, res
       .ensure => @_cleanup()
     promise.then ->
-      outstream.end()
+      res.end()
     .otherwise (err) ->
-      outstream.emit 'error', err
+      res.emit 'error', err
     res
