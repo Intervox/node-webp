@@ -31,7 +31,7 @@ from its [official website][get_webp.1], or from its [downloads repository][get_
 Linux users may use [this installation script][get_webp.3]
 to automatically download and install latest WebP binaries:
 
-    curl -s https://raw.github.com/Intervox/node-webp/latest/bin/install_webp | sudo bash
+    curl -s https://raw.githubusercontent.com/Intervox/node-webp/latest/bin/install_webp | sudo bash
 
 MacOS users may install WebP using [MacPorts][macports]:
 
