@@ -63,7 +63,7 @@ new streaming features of the latest WebP version.
 
   [get_webp.1]: https://developers.google.com/speed/webp/download
   [get_webp.2]: http://downloads.webmproject.org/releases/webp/index.html
-  [get_webp.3]: https://github.com/Intervox/node-webp/blob/latest/bin/install_webp
+  [get_webp.3]: https://raw.githubusercontent.com/Intervox/node-webp/latest/bin/install_webp
   [get_webp.4]: https://www.npmjs.org/package/webp
   [get_webp.5]: https://developers.google.com/speed/webp/docs/compiling
   [macports]: http://guide.macports.org/
