@@ -1,3 +1,11 @@
+1.0.2 / 2014-09-24
+==================
+
+ * Delayed stream ending\buffer promise fulfillment untill cleanup is complete [#3]
+
+
+  [#3]: https://github.com/Intervox/node-webp/issues/3
+
 1.0.1 / 2014-09-22
 ==================
 
