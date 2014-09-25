@@ -1,7 +1,7 @@
 {
   "author": "Leonid Beschastny <lbeschastny@iknow.travel>",
   "name": "cwebp",
-  "description": "node.js wrapper for cwebp",
+  "description": "node.js wrapper for cwebp and dwebp binaries from WebP image processing utility",
   "keywords": [
     "webp",
     "compress",
