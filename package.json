@@ -30,9 +30,9 @@
   "devDependencies": {
     "coffee-script": "~1.8.0",
     "minimist": "~1.1.0",
-    "mocha": "~1.21.4",
-    "should": "~4.0.4",
-    "stream-buffers": "~1.0.0",
+    "mocha": "~2.0.1",
+    "should": "~4.3.0",
+    "stream-buffers": "1.0.1",
     "webp": "0.0.4"
   }
 }
