@@ -32,7 +32,7 @@
     "minimist": "~1.1.0",
     "mocha": "~2.0.1",
     "should": "~4.3.0",
-    "stream-buffers": "1.0.1",
+    "stream-buffers": "~1.1.0",
     "webp": "0.0.4"
   }
 }

@@ -52,6 +52,7 @@ run_mocked (Webp) ->
         data = Math.random().toString(36)
         stream = new ReadableStreamBuffer
         stream.put data
+        stream.destroySoon()
         (new Webp stream).toBuffer().then (buffer) ->
           argv = JSON.parse buffer
           argv.should.have.keys '_', 'o', 'data'
