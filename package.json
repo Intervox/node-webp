@@ -28,11 +28,11 @@
     "when": "3"
   },
   "devDependencies": {
-    "coffee-script": "~1.8.0",
+    "coffee-script": "~1.9.1",
     "minimist": "~1.1.0",
-    "mocha": "~2.0.1",
-    "should": "~4.3.0",
-    "stream-buffers": "~1.1.0",
+    "mocha": "~2.2.1",
+    "should": "~5.2.0",
+    "stream-buffers": "~2.1.0",
     "webp": "0.0.4"
   }
 }
