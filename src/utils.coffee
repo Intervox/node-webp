@@ -20,7 +20,7 @@ exports.compile = (methods) ->
     else
       type = [type || 'string'] unless Array.isArray type
       (args...) ->
-        if args.lelgth < type.length
+        if args.length < type.length
           throw new Error 'Not enough arguments'
         vals = []
         for t in type

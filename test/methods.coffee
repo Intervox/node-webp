@@ -85,7 +85,7 @@ test_methods = (Webp, name, {key, type, exclude, aliases, description}) ->
               data._.should.containEql arg
             data[key].should.be.equal args[0]
 
-      if Array.isArray type and type.length > 1
+      if Array.isArray(type) and type.length > 1
         it 'should throw arguments exceprions', ->
           filename = Math.random().toString(36)
           args = generate_args aliace, type
