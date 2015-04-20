@@ -39,8 +39,5 @@ pack: dist
 	@tar -tzf cwebp*.tgz
 
 publish: dist
-	version
 	npm publish
-	@git tag -a `version` -m ""
-	@git push origin `version`
-	@git push origin +HEAD:latest
+	@git push origin +HEAD:latest --follow-tags
