@@ -1,3 +1,11 @@
+1.0.4 / 2015-04-20
+==================
+
+ * Fixed arguments exception [#4]
+
+
+  [#4]: https://github.com/Intervox/node-webp/issues/4
+
 1.0.3 / 2014-09-24
 ==================
 
