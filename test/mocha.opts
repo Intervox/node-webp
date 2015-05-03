@@ -1,0 +1,5 @@
+--compilers coffee:coffee-script/register
+--require test/utils/env
+--reporter spec
+--growl
+--slow 250

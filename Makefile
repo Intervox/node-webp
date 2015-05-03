@@ -22,13 +22,7 @@ build: clean
 	cp src/*.json lib/
 
 test:
-	@NODE_ENV=test mocha \
-		--compilers coffee:coffee-script/register \
-		--require test/utils/env \
-		--reporter $(REPORTER) \
-		--growl \
-		--slow 250 \
-		$(TESTS)
+	npm test
 
 dist: init test build
 
