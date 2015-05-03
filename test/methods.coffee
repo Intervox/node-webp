@@ -3,7 +3,7 @@ minimist = require 'minimist'
 
 {spawn} = child_process = require 'child_process'
 
-methods = require '../src/methods'
+methods = require '../methods'
 
 context = {}
 write = (webp, outname) ->

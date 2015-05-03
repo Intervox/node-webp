@@ -19,7 +19,6 @@ clean:
 
 build: clean
 	coffee -o lib/ -cb src/
-	cp src/*.json lib/
 
 test:
 	npm test

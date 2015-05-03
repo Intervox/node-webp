@@ -1,6 +1,6 @@
 {mixin, compile} = require './utils'
 Wrapper = require './wrapper'
-methods = require './methods'
+methods = require '../methods'
 
 
 exports.CWebp = class CWebp extends Wrapper
