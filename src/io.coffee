@@ -1,6 +1,5 @@
 rawBody = require 'raw-body'
 When = require 'when'
-path = require 'path'
 fs = require 'fs'
 
 # It should work for any version of when.js
@@ -15,10 +14,7 @@ catch
 streamToBuffer = nodefn.lift rawBody
 PassThrough ||= require 'through'
 
-tmpFilename = (ext = 'tmp') ->
-  tmpDir = process.env.TMPDIR || '/tmp'
-  base = Math.random().toString(36).slice(2,12)
-  path.resolve tmpDir, "node-webp-#{base}.#{ext}"
+tmpFilename = require './tmp'
 
 bindCallback = (promise, next) ->
   if typeof next is 'function'
