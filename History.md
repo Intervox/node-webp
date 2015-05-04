@@ -1,3 +1,11 @@
+1.0.5 / 2015-05-04
+==================
+
+ * Improved tmp directory lookup algorithm [#7]
+
+
+  [#7]: https://github.com/Intervox/node-webp/issues/4
+
 1.0.4 / 2015-04-20
 ==================
 
