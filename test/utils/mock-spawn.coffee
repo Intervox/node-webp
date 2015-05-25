@@ -21,7 +21,7 @@ write = (argv, stdout) ->
   filename = argv.o
   data = JSON.stringify argv
   if filename is '-'
-    stdout.write data
+    stdout.write new Buffer data
   else
     fs.writeFileSync filename, data
 
