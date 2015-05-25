@@ -5,11 +5,9 @@ nodefn = require 'when/node'
 {Buffer} = require 'buffer'
 {Stream} = require 'stream'
 
-{read, write} = require './utils/io'
-
 streamToBuffer = nodefn.lift rawBody
 
-run_mocked 'io', (Webp) ->
+run_mocked 'io', (Webp, {read, write}) ->
 
   describe 'output', ->
 

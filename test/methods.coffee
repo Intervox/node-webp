@@ -130,7 +130,7 @@ test_convention = (Webp) ->
         data.__[2].should.be.equal cmd
 
 
-run_tests 'methods', (Webp, cname) ->
+run_tests 'methods', (Webp, {}, cname) ->
 
   before (done) ->
     child_process.spawn = mock_spawn

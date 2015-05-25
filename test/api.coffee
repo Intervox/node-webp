@@ -1,6 +1,4 @@
-{read, write} = require './utils/io'
-
-run_mocked 'api', (Webp) ->
+run_mocked 'api', (Webp, {read, write}) ->
 
   it 'should report an external error', ->
     webp = new Webp 'FAIL'
