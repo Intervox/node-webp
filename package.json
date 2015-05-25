@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "raw-body": "1",
-    "should": "^6.0.1",
     "through": "~2.3",
     "when": "3"
   },
@@ -36,7 +35,7 @@
     "coffee-script": "~1.9.1",
     "minimist": "~1.1.0",
     "mocha": "~2.2.1",
-    "should": "~5.2.0",
+    "should": "~6.0.3",
     "stream-buffers": "~2.1.0",
     "webp": "0.0.4"
   }
