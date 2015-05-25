@@ -35,7 +35,7 @@
     "coffee-script": "~1.9.1",
     "minimist": "~1.1.0",
     "mocha": "~2.2.1",
-    "mock-spawn": "^0.2.5",
+    "mock-spawn": "~0.2.5",
     "should": "~6.0.3",
     "stream-buffers": "~2.1.0"
   }
