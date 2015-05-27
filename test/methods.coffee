@@ -130,23 +130,21 @@ test_convention = (Webp) ->
         data.__[2].should.be.equal cmd
 
 
-run_mocked (Webp, cname) ->
+run_tests 'methods', (Webp, {}, cname) ->
 
-  describe 'methods', ->
+  before (done) ->
+    child_process.spawn = mock_spawn
+    done()
 
-    before (done) ->
-      child_process.spawn = mock_spawn
-      done()
+  for name, params of methods.global
+    test_methods Webp, name, params
 
-    for name, params of methods.global
-      test_methods Webp, name, params
+  for name, params of methods[cname]
+    test_methods Webp, name, params
 
-    for name, params of methods[cname]
-      test_methods Webp, name, params
+  if name is 'cwebp'
+    test_convention Webp
 
-    if name is 'cwebp'
-      test_convention Webp
-
-    after (done) ->
-      child_process.spawn = spawn
-      done()
+  after (done) ->
+    child_process.spawn = spawn
+    done()

@@ -35,8 +35,8 @@
     "coffee-script": "~1.9.1",
     "minimist": "~1.1.0",
     "mocha": "~2.2.1",
+    "mock-spawn": "git://github.com/lbeschastny/mock-spawn.git#v0.2.6",
     "should": "~6.0.3",
-    "stream-buffers": "~2.1.0",
-    "webp": "0.0.4"
+    "stream-buffers": "~2.1.0"
   }
 }

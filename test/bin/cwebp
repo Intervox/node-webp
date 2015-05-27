@@ -1,3 +1,0 @@
-#!/usr/bin/env coffee
-
-require('./mock')(process.argv)

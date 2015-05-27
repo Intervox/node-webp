@@ -1,12 +1,20 @@
-run = (handler, {CWebp, DWebp}) ->
+{mock, unmock} = require './mock-spawn'
+{CWebp, DWebp} = require '../../src'
+
+run = (handler, helpers) ->
   describe 'cwebp', ->
-    handler CWebp, 'cwebp'
+    handler CWebp, helpers, 'cwebp'
 
   describe 'dwebp', ->
-    handler DWebp, 'dwebp'
+    handler DWebp, helpers, 'dwebp'
 
-exports.run = (handler) ->
-  run handler, require '../../src'
 
-exports.run_mocked = (handler) ->
-  run handler, require './mock'
+exports.run = (name, handler) ->
+  describe name, ->
+    run handler, {}
+
+exports.run_mocked = (name, handler) ->
+  describe name, ->
+    before mock
+    run handler, require './io'
+    after unmock
