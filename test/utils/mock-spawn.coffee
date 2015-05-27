@@ -25,10 +25,10 @@ write = (argv, stdout) ->
   else
     fs.writeFileSync filename, data
 
+mySpawn = mockSpawn()
+
 fail = (code, msg) ->
   mySpawn.simple code, null, "Error: #{msg}"
-
-mySpawn = mockSpawn()
 
 mySpawn.setStrategy (cmd, args, opts) ->
   if cmd in ['cwebp', 'dwebp']
@@ -46,9 +46,14 @@ mySpawn.setStrategy (cmd, args, opts) ->
   else if /-mock/.test cmd
     mySpawn.simple 0, cmd
 
+mySpawnPaused = (cmd, args, opts) ->
+  proc = mySpawn cmd, args, opts
+  proc.stdin.pause()
+  return proc
+
 cp.spawn = smartSpawn = (cmd, args, opts) ->
   fn = if mocked
-    mySpawn
+    mySpawnPaused
   else if cp.spawn is smartSpawn
     spawn
   else
