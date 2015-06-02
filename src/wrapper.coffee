@@ -22,7 +22,8 @@ module.exports = class Wrapper
       'pipe' # stderr
     ]
     proc = spawn @bin, args, {stdio}
-    proc.once 'error', reject
+    proc.once 'error', (err) ->
+      reject err unless err.code is 'OK' is err.errno
     proc.once 'close', onClose = (code, signal) ->
       if code isnt 0 or signal isnt null
         err = new Error "Command failed: #{stderr}"

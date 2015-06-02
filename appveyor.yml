@@ -1,0 +1,19 @@
+environment:
+  matrix:
+  - nodejs_version: "0.8"
+  - nodejs_version: "0.10"
+  - nodejs_version: "0.12"
+  webp_version: "0.4.3"
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm install
+  - ps: .\bin\download_webp.ps1
+
+test_script:
+  - cwebp -version
+  - node --version
+  - npm --version
+  - npm test
+
+build: off
