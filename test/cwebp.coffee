@@ -1,4 +1,5 @@
 fs = require 'fs'
+os = require 'os'
 
 {CWebp} = require '../src'
 data = require './utils/data'
@@ -19,25 +20,17 @@ describe 'cwebp', ->
         buffer.toString('utf8', 0, 4).should.be.equal 'RIFF'
         buffer.toString('utf8', 8, 12).should.be.equal 'WEBP'
 
-    it 'should report verbose errors', ->
+    it 'should report errors', ->
       webp = new CWebp data.corrupt
-      webp.verbose().toBuffer().then ->
-        throw new Error 'Should not be fulfilled'
-      , (err) ->
-        err.should.be.Error
-        err.message.should.match /Premature end of JPEG file/
-        err.message.should.match /JPEG datastream contains no image/
-
-    it 'should allow default verbose rewriting', ->
-      class Webp3 extends CWebp
-        @verbose: true
-      webp = new Webp3 data.corrupt
       webp.toBuffer().then ->
         throw new Error 'Should not be fulfilled'
       , (err) ->
         err.should.be.Error
-        err.message.should.match /Premature end of JPEG file/
-        err.message.should.match /JPEG datastream contains no image/
+        if os.platform() is 'linux'
+          err.message.should.match /Premature end of JPEG file/
+          err.message.should.match /JPEG datastream contains no image/
+        err.message.should.match /Error! Could not process file/
+        err.message.should.match /Error! Cannot read input picture file/
 
     it 'should cleanup tmp files on error', ->
       filename = ''
