@@ -254,33 +254,6 @@ decoder.tiff();
 encoder.command('-d', 'dump.pgm');
 ```
 
-#### Verbose errors reporting
-
-`node-webp` returns any error reported by `cwebp` or `dwebp`.
-By default it uses standard error reporting mode,
-but it's possible to enable `cwebp` verbose error reporting.
-
-```js
-var CWebp = require('cwebp').CWebp;
-
-new CWebp(source).verbose().toBuffer(function (err, res) {
-    // err.message contains verbose error
-});
-```
-
-`dwebp` don't support verbose error reporting.
-
-#### Changing default behaviour
-
-```js
-var CWebp = require('cwebp').CWebp;
-CWebp.verbose = true;
-
-new CWebp(source).toBuffer(function (err, res) {
-    // err.message contains verbose error
-});
-```
-
 ## [Changelog][history]
 
   [history]: https://github.com/Intervox/node-webp/blob/latest/History.md
