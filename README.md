@@ -2,13 +2,17 @@
 
   [webp]: https://developers.google.com/speed/webp/
 
-[![Build Status][travis_icon]][travis]
-[![Dependency Status][david_icon]][david]
+<!-- badges -->
+[![Linux Build Status][travis_badge]][travis]
+[![Windows Build Status][appveyor_badge]][appveyor]
+[![Dependency Status][david_badge]][david]
 
-  [travis_icon]: https://travis-ci.org/Intervox/node-webp.png?branch=latest
-  [david_icon]: https://david-dm.org/Intervox/node-webp.png
+  [travis_badge]: https://img.shields.io/travis/Intervox/node-webp/latest.svg?label=linux%20build
+  [appveyor_badge]: https://img.shields.io/appveyor/ci/lbeschastny/node-webp/latest.svg?label=windows%20build
+  [david_badge]: https://david-dm.org/Intervox/node-webp.svg
   [travis]: https://travis-ci.org/Intervox/node-webp
   [david]: https://david-dm.org/Intervox/node-webp
+  [appveyor]: https://ci.appveyor.com/project/lbeschastny/node-webp
 
 node-webp
 =========
