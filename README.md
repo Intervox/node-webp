@@ -3,13 +3,16 @@
   [webp]: https://developers.google.com/speed/webp/
 
 <!-- badges -->
+[![NPM Package][repo_badge]][repo]
 [![Linux Build Status][travis_badge]][travis]
 [![Windows Build Status][appveyor_badge]][appveyor]
 [![Dependency Status][david_badge]][david]
 
+  [repo_badge]: https://img.shields.io/npm/v/cwebp.svg
   [travis_badge]: https://img.shields.io/travis/Intervox/node-webp/latest.svg?label=linux%20build
   [appveyor_badge]: https://img.shields.io/appveyor/ci/lbeschastny/node-webp/latest.svg?label=windows%20build
   [david_badge]: https://david-dm.org/Intervox/node-webp.svg
+  [repo]: https://www.npmjs.com/package/cwebp
   [travis]: https://travis-ci.org/Intervox/node-webp
   [david]: https://david-dm.org/Intervox/node-webp
   [appveyor]: https://ci.appveyor.com/project/lbeschastny/node-webp
