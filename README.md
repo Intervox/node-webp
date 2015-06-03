@@ -14,7 +14,7 @@
   [david_badge]: https://img.shields.io/david/Intervox/node-webp/latest.svg?label=deps
   [repo]: https://www.npmjs.com/package/cwebp
   [travis]: https://travis-ci.org/Intervox/node-webp
-  [david]: https://david-dm.org/Intervox/node-webp
+  [david]: https://david-dm.org/Intervox/node-webp/latest
   [appveyor]: https://ci.appveyor.com/project/lbeschastny/node-webp
 
 node-webp
