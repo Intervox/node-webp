@@ -2,7 +2,6 @@
 
   [webp]: https://developers.google.com/speed/webp/
 
-<!-- badges -->
 [![NPM Package][repo_badge]][repo]
 [![Linux Build Status][travis_badge]][travis]
 [![Windows Build Status][appveyor_badge]][appveyor]
