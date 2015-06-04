@@ -27,7 +27,7 @@
     "node": ">= 0.8.0"
   },
   "dependencies": {
-    "raw-body": "1",
+    "raw-body": "2",
     "through": "~2.3",
     "when": "3"
   },
