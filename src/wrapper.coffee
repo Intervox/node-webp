@@ -22,7 +22,7 @@ module.exports = class Wrapper
       'pipe' # stderr
     ]
     proc = spawn @bin, args, {stdio}
-    proc.once 'error', (err) ->
+    proc.once 'error', onError = (err) ->
       reject err unless err.code is 'OK' is err.errno
     proc.once 'close', onClose = (code, signal) ->
       if code isnt 0 or signal isnt null
@@ -32,13 +32,13 @@ module.exports = class Wrapper
         reject err
       else
         resolve()
-    proc.stderr.on 'data', onErr = (data) ->
+    proc.stderr.on 'data', onErrData = (data) ->
       stderr += data
     promise = promise.ensure ->
       # Cleanup
-      proc.removeListener 'error', reject
+      proc.removeListener 'error', onError
       proc.removeListener 'close', onClose
-      proc.stderr.removeListener 'close', onErr
+      proc.stderr.removeListener 'data', onErrData
     res = {promise}
     res.stdin = proc.stdin if stdin
     res.stdout = proc.stdout if stdout
