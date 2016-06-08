@@ -3,7 +3,7 @@ environment:
   - nodejs_version: "0.8"
   - nodejs_version: "0.10"
   - nodejs_version: "0.12"
-  webp_version: "0.4.3"
+  webp_version: "0.5.0"
 
 install:
   - ps: Install-Product node $env:nodejs_version

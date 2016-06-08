@@ -1,10 +1,10 @@
 $version = $env:webp_version
 
 if ($version -eq $null) {
-  $version = "0.4.3"
+  $version = "0.5.0"
 }
 
-$url_base = "http://downloads.webmproject.org/releases/webp/"
+$url_base = "http://storage.googleapis.com/downloads.webmproject.org/releases/webp/"
 
 $dir = $env:APPVEYOR_BUILD_FOLDER
 
