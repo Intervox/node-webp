@@ -31,5 +31,3 @@ exports.DWebp = class DWebp extends Wrapper
       return new DWebp source, bin
 
     super
-
-    @_stdin = true

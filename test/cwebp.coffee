@@ -28,19 +28,3 @@ describe 'cwebp', ->
         err.should.be.Error
         err.message.should.match /Could not process file/
         err.message.should.match /Cannot read input picture file/
-
-    it 'should cleanup tmp files on error', ->
-      filename = ''
-      webp = new CWebp data.corrupt
-      promise = webp.toBuffer()
-      webp._tmpFilename.then (tmpFilename) ->
-        filename = tmpFilename
-        filename.should.not.be.empty
-        fs.existsSync(filename).should.be.true
-        promise
-      .then ->
-        throw new Error 'Should not be fulfilled'
-      , (err) ->
-        err.should.be.Error
-        filename.should.not.be.empty
-        fs.existsSync(filename).should.be.false
