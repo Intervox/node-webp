@@ -48,24 +48,13 @@ If none of it suit your needs, you may [build the WebP utilities yourself][get_w
 
 ### Alternative ways to install [WebP][webp]
 
-MacOS users may install webp `0.4.0` using [homebrew][homebrew]:
+MacOS users may install webp `0.5.0` using [homebrew][homebrew]:
 
     brew install webp
 
 You may also [install webp `0.3.x` as npm module][get_webp.4]:
 
     npm install webp
-
-### Important: Using old WebP versions
-
-Old versions of WebP (prior to `0.4.1`)
-are not compatible with the latest `node-webp` version.
-
-If you're using old version of WebP, please,
-use [node-webp `0.1.x`][v0.1.10].
-
-Check [this section][working-with-streams] for more info about
-new streaming features of the latest WebP version.
 
   [get_webp.1]: https://developers.google.com/speed/webp/download
   [get_webp.2]: http://downloads.webmproject.org/releases/webp/index.html
@@ -74,8 +63,14 @@ new streaming features of the latest WebP version.
   [get_webp.5]: https://developers.google.com/speed/webp/docs/compiling
   [macports]: http://guide.macports.org/
   [homebrew]: http://brew.sh/
-  [working-with-streams]: #working-with-streams
-  [v0.1.10]: https://github.com/Intervox/node-webp/tree/v0.1.10
+
+## WebP versions compatibility
+
+| `node-webp` version  | Fully compatible WebP versions | Partially compatible WebP versions |
+| -------------------- | ------------------------------ | ---------------------------------- |
+| `0.1.x`              | all versions                   | all versions                       |
+| `1.x`                | `0.4.1` and later              | all versions                       |
+| `2.x`                | `0.5.0` and later              | all versions                       |
 
 ## Usage
 
@@ -190,31 +185,6 @@ stream.on('error', function(err) {
   // something bad happened
 });
 ```
-
-### Working with Streams
-
-Different versions of WebP have different level of streaming support:
-
-| Feature                | Older WebP versions | WebP 0.4.1   | node-webp 0.1.x | node-webp 1.x     |
-| ---------------------- | ------------------- | ------------ | --------------- | ----------------- |
-| cwebp stdin streaming  | **_no_**            | **_no_**     | **_mock_**      | **_mock_**        |
-| cwebp stdout streaming | **_no_**            | **_native_** | **_mock_**      | **_native_**      |
-| dwebp stdin streaming  | **_no_**            | **_native_** | **_mock_**      | **_native_**      |
-| dwebp stdout streaming | **_no_**            | **_native_** | **_mock_**      | **_native_**      |
-
-**_mock_** means that `node-webp` acts as if the feature is supported,
-mocking it using temporary files.
-
-So, converting Stream into a Buffer with node-webp `0.x` will cause
-two temporary files to be created and then removed
-(one to store input stream, and another to read output buffer from).
-
-Note that `node-webp` **_native_** streaming will work only
-if your WebP version have **_native_** support for the corresponding stream,
-while **_mock_** streaming will work with any version of WebP.
-
-**IMPORTANT:** If you're using old version of WebP, please,
-use [node-webp `0.1.x`][v0.1.10].
 
 ### Using promises
 
