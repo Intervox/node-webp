@@ -14,8 +14,6 @@ catch
 streamToBuffer = nodefn.lift rawBody
 PassThrough ||= require 'through'
 
-tmpFilename = require './tmp'
-
 bindCallback = (promise, next) ->
   if typeof next is 'function'
     nodefn.bindCallback promise, next
