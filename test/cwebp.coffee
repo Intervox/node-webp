@@ -26,11 +26,8 @@ describe 'cwebp', ->
         throw new Error 'Should not be fulfilled'
       , (err) ->
         err.should.be.Error
-        if os.platform() is 'linux'
-          err.message.should.match /Premature end of JPEG file/
-          err.message.should.match /JPEG datastream contains no image/
-        err.message.should.match /Error! Could not process file/
-        err.message.should.match /Error! Cannot read input picture file/
+        err.message.should.match /Could not process file/
+        err.message.should.match /Cannot read input picture file/
 
     it 'should cleanup tmp files on error', ->
       filename = ''
