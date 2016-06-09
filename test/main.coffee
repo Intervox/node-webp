@@ -21,7 +21,7 @@ run_tests 'main', (Webp) ->
       throw new Error 'Should not be fulfilled'
     , (err) ->
       err.should.be.Error
-      proc._events.should.be.empty
+      should(proc._events).be.empty
       {stdout, stderr} = proc
       stdout.listeners('data').should.be.empty
       stderr.listeners('data').should.be.empty
