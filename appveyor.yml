@@ -5,7 +5,7 @@ environment:
   - nodejs_version: "0.12"
   - nodejs_version: "4"
   - nodejs_version: "5"
-  - nodejs_version: "6
+  - nodejs_version: "6"
   webp_version: "0.5.0"
 
 install:
