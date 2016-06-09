@@ -1,3 +1,10 @@
+2.0.0 / 2016-06-09
+==================
+
+ * Full stdio streaming support
+ * **BREAKING:** WebP `0.4.x` is no longer supported
+ * **BREAKING:** NodeJS `0.8.x` is no longer supported
+
 1.1.0 / 2015-06-04
 ==================
 
