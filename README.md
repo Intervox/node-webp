@@ -76,7 +76,7 @@ You may also [install webp `0.3.x` as npm module][get_webp.4]:
 
 ```js
 var CWebp = require('cwebp').CWebp;
-var DWebp = require('dwebp').DWebp;
+var DWebp = require('cwebp').DWebp;
 
 var encoder = new CWebp(source_image);
 var decoder = new DWebp(source_webp);
