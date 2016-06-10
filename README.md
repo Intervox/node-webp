@@ -134,7 +134,7 @@ When source is a string `node-webp` treats it as a file path.
 
 ```js
 var CWebp = require('cwebp').CWebp;
-var DWebp = require('dwebp').DWebp;
+var DWebp = require('cwebp').DWebp;
 
 var encoder = new CWebp('original.jpeg');
 var decoder = new DWebp('converted.webp');
