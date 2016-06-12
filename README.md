@@ -222,7 +222,7 @@ encoder.quality(60);
 decoder.tiff();
 ```
 
-  [methods]: https://github.com/Intervox/node-webp/blob/latest/src/methods.json
+  [methods]: https://github.com/Intervox/node-webp/blob/latest/methods.json
 
 #### Sending raw command
 
