@@ -23,12 +23,12 @@
     "quality": {
       "key": "q",
       "type": "number",
-      "description": "quality factor (0:small..100:big)"
+      "description": "quality factor (0:small..100:big), default=75"
     },
     "alphaQuality": {
       "key": "alpha_q",
       "type": "number",
-      "description": "transparency-compression quality (0..100)"
+      "description": "transparency-compression quality (0..100), default=100"
     },
     "preset": {
       "description": "preset setting, one of: default, photo, picture, drawing, icon, text"
@@ -41,11 +41,11 @@
     "compression": {
       "key": "m",
       "type": "number",
-      "description": "compression method (0=fast, 6=slowest)"
+      "description": "compression method (0=fast, 6=slowest), default=4"
     },
     "segments": {
       "type": "number",
-      "description": "number of segments to use (1..4)"
+      "description": "number of segments to use (1..4), default=4"
     },
     "size": {
       "type": "number",
@@ -65,16 +65,16 @@
     },
     "sns": {
       "type": "number",
-      "description": "spatial Noise Shaping (0:off, 100:max)"
+      "description": "spatial Noise Shaping (0:off, 100:max), default=50"
     },
     "strength": {
       "key": "f",
       "type": "number",
-      "description": "filter strength (0=off..100)"
+      "description": "filter strength (0=off..100), default=60"
     },
     "sharpness": {
       "type": "number",
-      "description": "filter sharpness (0:most .. 7:least sharp)"
+      "description": "filter sharpness (0:most .. 7:least sharp), default=0"
     },
     "strong": {
       "type": "boolean",
@@ -117,7 +117,7 @@
     "alphaMethod": {
       "key": "alpha_method",
       "type": "number",
-      "description": "transparency-compression method (0..1)"
+      "description": "transparency-compression method (0..1), default=1"
     },
     "alphaFilter": {
       "key": "alpha_filter",
@@ -138,16 +138,16 @@
     },
     "exact": {
       "type": "boolean",
-      "description": "preserve RGB values in transparent area"
+      "description": "preserve RGB values in transparent area, default=off"
     },
     "lossless": {
       "type": "boolean",
-      "description": "encode image losslessly"
+      "description": "encode image losslessly, default=off"
     },
     "nearLossless": {
       "key": "near_lossless",
       "type": "number",
-      "description": "use near-lossless image preprocessing (0..100=off)"
+      "description": "use near-lossless image preprocessing (0..100=off), default=100"
     },
     "hint": {
       "description": "specify image characteristics hint, one of: photo, picture or graph"
