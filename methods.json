@@ -89,6 +89,11 @@
       ],
       "description": "use simple filter instead of strong"
     },
+    "sharpYUV": {
+      "key": "sharp_yuv",
+      "type": "boolean",
+      "description": "use sharper (and slower) RGB->YUV conversion"
+    },
     "partitionLimit": {
       "key": "partition_limit",
       "type": "number",
