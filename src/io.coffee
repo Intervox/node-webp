@@ -1,6 +1,5 @@
 rawBody = require 'raw-body'
 When = require 'when'
-fs = require 'fs'
 
 # It should work for any version of when.js
 nodefn = try
