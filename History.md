@@ -1,7 +1,7 @@
 2.0.3 / 2018-06-15
 ==================
 
- * Updated installation scripts to install `webp 0.6.0`
+ * Updated installation scripts to install `webp 1.0.0`
 
 2.0.2 / 2017-08-30
 ==================
