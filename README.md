@@ -10,7 +10,7 @@
   [repo_badge]: https://img.shields.io/npm/v/cwebp.svg
   [travis_badge]: https://img.shields.io/travis/Intervox/node-webp/latest.svg?label=linux%20build
   [appveyor_badge]: https://img.shields.io/appveyor/ci/lbeschastny/node-webp/latest.svg?label=windows%20build
-  [david_badge]: https://img.shields.io/david/Intervox/node-webp/latest.svg?label=deps
+  [david_badge]: https://david-dm.org/Intervox/node-webp/latest/status.svg
   [repo]: https://www.npmjs.com/package/cwebp
   [travis]: https://travis-ci.org/Intervox/node-webp
   [david]: https://david-dm.org/Intervox/node-webp/latest
