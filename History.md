@@ -1,3 +1,11 @@
+2.0.4 / 2019-10-11
+==================
+
+ * Updated installation scripts to install `webp 1.0.3` [#20]
+
+
+  [#20]: https://github.com/Intervox/node-webp/issues/20
+
 2.0.3 / 2018-06-15
 ==================
 
