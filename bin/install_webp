@@ -5,7 +5,7 @@ if [ `id -u` != "0" ]; then
   exit 1
 fi
 
-VERSION=${1:-1.0.3}
+VERSION=${1:-1.1.0}
 
 URL_BASE="http://storage.googleapis.com/downloads.webmproject.org/releases/webp/"
 
