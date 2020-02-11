@@ -1,7 +1,7 @@
 $version = $env:webp_version
 
 if ($version -eq $null) {
-  $version = "1.0.3"
+  $version = "1.1.0"
 }
 
 $url_base = "http://storage.googleapis.com/downloads.webmproject.org/releases/webp/"
@@ -18,6 +18,8 @@ if ($x64_os -eq "True") {
   $arch = "x64"
 } else {
   $arch = "x86"
+  Write-Error "32-bit windows binaries were dropped from libwebp 1.1.0 release, but the source code still builds for that platform"
+  exit 1
 }
 
 $filename = "libwebp-{0}-windows-{1}.zip" -f $version,$arch
