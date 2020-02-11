@@ -16,10 +16,11 @@ $x64_os = (Get-WmiObject -Class Win32_ComputerSystem).SystemType -match "(x64)"
 
 if ($x64_os -eq "True") {
   $arch = "x64"
+} elseif ([version]$version -ge [version]"1.1.0") {
+  Write-Error "32-bit windows binaries were dropped from libwebp starting from 1.1.0 release, consider using prior release or building webp from source"
+  exit 1
 } else {
   $arch = "x86"
-  Write-Error "32-bit windows binaries were dropped from libwebp 1.1.0 release, but the source code still builds for that platform"
-  exit 1
 }
 
 $filename = "libwebp-{0}-windows-{1}.zip" -f $version,$arch
