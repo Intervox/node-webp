@@ -1,0 +1,6 @@
+require:
+  - coffee-script/register
+  - test/utils/env.coffee
+reporter: spec
+growl: true
+slow: 250
