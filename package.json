@@ -32,7 +32,7 @@
     "when": "3"
   },
   "devDependencies": {
-    "coffee-script": "^1.10.0",
+    "coffeescript": "^1.10.0",
     "minimist": "^1.2.0",
     "mocha": "^10.2.0",
     "mock-spawn": "^0.2.5",

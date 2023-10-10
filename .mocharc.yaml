@@ -1,5 +1,5 @@
 require:
-  - coffee-script/register
+  - coffeescript/register
   - test/utils/env.coffee
 reporter: spec
 growl: true
