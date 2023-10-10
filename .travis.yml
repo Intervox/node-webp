@@ -1,11 +1,9 @@
 language: node_js
 node_js:
-  - "0.12"
-  - "0.10"
-  - "4"
-  - "6"
-  - "8"
-  - "10"
   - "12"
+  - "14"
+  - "16"
+  - "18"
+  - "20"
 before_install:
   - sudo ./bin/install_webp
