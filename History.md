@@ -1,3 +1,13 @@
+2.1.0 / 2023-10-10
+==================
+
+ * Add `.spawnOptions()` method [#30]
+ * Updated installation scripts to install `webp 1.3.2` [#31]
+ * Run tests using GitHub Actions
+
+  [#30]: https://github.com/Intervox/node-webp/issues/30
+  [#31]: https://github.com/Intervox/node-webp/issues/31
+
 2.0.5 / 2019-10-11
 ==================
 
