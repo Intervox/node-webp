@@ -20,7 +20,7 @@
     "clean": "rm -rf lib/ cwebp-*.tgz",
     "test": "mocha test/*.coffee",
     "list-files": "tar -tzf `npm pack | tail -n 1`",
-    "prepublish": "npm run clean && coffee -o lib/ -cb src/",
+    "prepack": "npm run clean && coffee -o lib/ -cb src/",
     "postpublish": "git push origin +HEAD:latest --follow-tags"
   },
   "engines": {
