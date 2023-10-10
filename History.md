@@ -1,3 +1,10 @@
+3.0.0 / 2023-10-10
+==================
+
+ * Use native Promise
+ * Remove `PassThrough` polyfill
+ * Drop support for Node.js version before 12.x
+
 2.1.1 / 2023-10-10
 ==================
 
