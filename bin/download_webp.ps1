@@ -1,7 +1,7 @@
 $version = $env:webp_version
 
 if ($version -eq $null) {
-  $version = "1.1.0"
+  $version = "1.3.2"
 }
 
 $url_base = "http://storage.googleapis.com/downloads.webmproject.org/releases/webp/"
