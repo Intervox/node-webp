@@ -33,6 +33,7 @@ fail = (code, msg) ->
 mySpawn.setStrategy (cmd, args, opts) ->
   if cmd in ['cwebp', 'dwebp']
     argv = minimist args
+    argv.__opts = opts
     if argv._[0] is 'FAIL'
       fail 1, 'FAIL'
     else if argv.o

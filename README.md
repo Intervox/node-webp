@@ -223,6 +223,12 @@ decoder.tiff();
 encoder.command('-d', 'dump.pgm');
 ```
 
+#### Providing custom spawn options
+
+```js
+encoder.spawnOptions({detached: true});
+```
+
 ## [Changelog][history]
 
   [history]: https://github.com/Intervox/node-webp/blob/latest/History.md

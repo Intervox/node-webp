@@ -23,3 +23,12 @@ run_mocked 'spawn', (Webp) ->
       res += data
     promise.then  ->
       res.should.be.equal cmd
+
+  it 'should accept custom spawn options', ->
+    filename = Math.random().toString(36)
+    webp = new Webp filename
+    webp.spawnOptions detached: true
+    webp.toBuffer().then (buffer) ->
+      argv = JSON.parse buffer
+      argv.should.have.keys '__opts'
+      argv.__opts.should.have.property 'detached', true

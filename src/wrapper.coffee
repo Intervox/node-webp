@@ -10,18 +10,24 @@ module.exports = class Wrapper
 
   constructor: (source, bin) ->
     @_args = {_: []}
+    @_opts = {}
     @source = source
     @bin = bin || @constructor.bin
+
+  spawnOptions: (options) ->
+    for key, value of options
+      @_opts[key] = value
+    return @
 
   _spawn: (args, stdin = false, stdout = false) ->
     {resolve, reject, promise} = When.defer()
     stderr = ''
-    stdio = [
+    @_opts.stdio = [
       if stdin  then 'pipe' else 'ignore'
       if stdout then 'pipe' else 'ignore'
       'pipe' # stderr
     ]
-    proc = spawn @bin, args, {stdio}
+    proc = spawn @bin, args, @_opts
     proc.once 'error', onError = (err) ->
       reject err unless err.code is 'OK' is err.errno
     proc.once 'close', onClose = (code, signal) ->
