@@ -1,0 +1,32 @@
+name: Run tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        node-version: ['12.x', '14.x', '16.x', '18.x', '20.x']
+        platform: ['ubuntu', 'windows']
+
+    name: Test Node.js ${{ matrix.node-version }} on on ${{ matrix.platform }}
+    runs-on: ${{ matrix.platform }}-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm ci
+
+      - name: Install webp (windows)
+        if: matrix.platform == 'windows'
+        shell: pwsh
+        run: .\bin\download_webp.ps1
+
+      - name: Install webp
+        if: matrix.platform != 'windows'
+        run: sudo ./bin/install_webp
+
+      - run: npm test
