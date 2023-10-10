@@ -24,12 +24,10 @@
     "postpublish": "git push origin +HEAD:latest --follow-tags"
   },
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">=12"
   },
   "dependencies": {
-    "raw-body": "2",
-    "through": "~2.3",
-    "when": "3"
+    "raw-body": "2"
   },
   "devDependencies": {
     "coffeescript": "^1.10.0",

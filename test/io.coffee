@@ -1,11 +1,8 @@
-rawBody = require 'raw-body'
-nodefn = require 'when/node'
+streamToBuffer = require 'raw-body'
 {ReadableStreamBuffer} = require 'stream-buffers'
 
 {Buffer} = require 'buffer'
 {Stream} = require 'stream'
-
-streamToBuffer = nodefn.lift rawBody
 
 run_mocked 'io', (Webp, {read, write}) ->
 

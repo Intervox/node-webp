@@ -25,5 +25,5 @@ run_tests 'main', (Webp) ->
       {stdout, stderr} = proc
       stdout.listeners('data').should.be.empty
       stderr.listeners('data').should.be.empty
-    .ensure ->
+    .finally ->
       child_process.spawn = spawn

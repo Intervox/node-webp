@@ -1,8 +1,13 @@
-When = require 'when'
 {spawn} = require 'child_process'
 
 {mixin} = require './utils'
 
+defer = () ->
+  res = {}
+  res.promise = new Promise (resolve, reject) ->
+    res.resolve = resolve
+    res.reject = reject
+  res
 
 module.exports = class Wrapper
   mixin this, require './args'
@@ -20,7 +25,7 @@ module.exports = class Wrapper
     return @
 
   _spawn: (args, stdin = false, stdout = false) ->
-    {resolve, reject, promise} = When.defer()
+    {resolve, reject, promise} = defer()
     stderr = ''
     @_opts.stdio = [
       if stdin  then 'pipe' else 'ignore'
@@ -40,7 +45,7 @@ module.exports = class Wrapper
         resolve()
     proc.stderr.on 'data', onErrData = (data) ->
       stderr += data
-    promise = promise.ensure ->
+    promise = promise.finally ->
       # Cleanup
       proc.removeListener 'error', onError
       proc.removeListener 'close', onClose
