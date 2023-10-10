@@ -9,14 +9,13 @@
 
 .gitignore
 .npmignore
-.travis.yml
-appveyor.yml
-Makefile
+.mocharc.yaml
 out.json
 
 bin/
 src/
 test/
 node_modules/
+.github/
 
 npm-debug.log
