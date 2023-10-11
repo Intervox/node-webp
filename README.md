@@ -136,7 +136,7 @@ var encoder = new CWebp(buffer);
 var decoder = new DWebp(stream);
 ```
 
-Note that `node-webp` will start listening to the data in a source stream
+Note that `node-webp` will start consuming the input stream
 only when `.write()`, `.stream()` or `.toBuffer()` is called.
 
 ### Encoding and decodind WebP images
@@ -174,7 +174,7 @@ stream.on('error', function(err) {
 
 ### Using promises
 
-`node-webp` supports A+ promises.
+`node-webp` supports promises.
 
 ```js
 encoder.write('image.webp').then(function() {
@@ -193,10 +193,6 @@ decoder.stream().then(function(stream) {
     // ...
 });
 ```
-
-`node-webp` uses [when.js][when] library.
-
-  [when]: https://github.com/cujojs/when
 
 ### Specifying conversion options
 
