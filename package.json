@@ -15,12 +15,10 @@
     "type": "git",
     "url": "https://github.com/Intervox/node-webp.git"
   },
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "scripts": {
-    "clean": "rm -rf lib/ cwebp-*.tgz",
     "test": "mocha test/*.coffee",
     "list-files": "tar -tzf `npm pack | tail -n 1`",
-    "prepack": "npm run clean && coffee -o lib/ -cb src/",
     "postpublish": "git push origin +HEAD:latest --follow-tags"
   },
   "engines": {
