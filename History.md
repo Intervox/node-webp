@@ -1,3 +1,9 @@
+3.1.0 / 2024-04-18
+==================
+
+ * Updated installation scripts to install `webp 1.4.0` [#32]
+ * Update Linux installation script to support `aarch64`  [#32]
+
 3.0.0 / 2023-10-10
 ==================
 
