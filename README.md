@@ -139,7 +139,7 @@ var decoder = new DWebp(stream);
 Note that `node-webp` will start consuming the input stream
 only when `.write()`, `.stream()` or `.toBuffer()` is called.
 
-### Encoding and decodind WebP images
+### Encoding and decoding WebP images
 
 ```js
 encoder.write('image.webp', function(err) {
