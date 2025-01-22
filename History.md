@@ -1,3 +1,10 @@
+3.2.0 / 2025-01-22
+==================
+
+ * Updated installation scripts to install `webp 1.5.0` [#35]
+
+  [#35]: https://github.com/Intervox/node-webp/issues/31
+
 3.1.0 / 2024-04-18
 ==================
 
