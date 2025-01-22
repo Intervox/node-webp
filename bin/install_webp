@@ -7,18 +7,28 @@ fi
 
 VERSION=${1:-1.5.0}
 
-URL_BASE="http://storage.googleapis.com/downloads.webmproject.org/releases/webp/"
+URL_BASE="https://storage.googleapis.com/downloads.webmproject.org/releases/webp/"
 
-MACHINE_TYPE=`uname -m`
-if [ ${MACHINE_TYPE} == 'x86_64' ]; then
+MACHINE_TYPE=`uname -s`
+if [ ${MACHINE_TYPE} == 'Darwin' ]; then
+  PLATFORM="mac"
+else
+  PLATFORM="linux"
+fi
+
+MACHINE_ARCH=`uname -m`
+if [ ${MACHINE_ARCH} == 'x86_64' ]; then
   # 64-bit system
-  FILENAME="libwebp-$VERSION-linux-x86-64.tar.gz"
-elif [${MACHINE_TYPE} == 'aarch64' ]; then
-  # 64-bit ARM system
-  FILENAME="libwebp-$VERSION-linux-aarch64.tar.gz"
+  ARCH="x86-64"
+elif [ ${MACHINE_ARCH} == 'arm64' ]; then
+  # 64-bit ARM system (mac)
+  ARCH="arm64"
+elif [ ${MACHINE_ARCH} == 'aarch64' ]; then
+  # 64-bit ARM system (linux)
+  ARCH="aarch64"
 else
   # 32-bit system
-  FILENAME="libwebp-$VERSION-linux-x86-32.tar.gz"
+  ARCH="x86-32"
 fi
 
 CURDIR=`pwd`
@@ -27,7 +37,9 @@ TMPDIR=`mktemp -d`
 cd $TMPDIR
 
 set -e
-curl $URL_BASE$FILENAME --output $FILENAME
+FILENAME="libwebp-$VERSION-$PLATFORM-$ARCH.tar.gz"
+echo "downloading $FILENAME"
+curl -f --no-progress-meter $URL_BASE$FILENAME --output $FILENAME
 echo "installing..."
 tar --strip-components=1 -zxf $FILENAME
 if [ -d ./bin ]; then
