@@ -4,6 +4,8 @@
  * Updated installation scripts to install `webp 1.4.0` [#32]
  * Update Linux installation script to support `aarch64`  [#32]
 
+  [#32]: https://github.com/Intervox/node-webp/issues/31
+
 3.0.0 / 2023-10-10
 ==================
 
