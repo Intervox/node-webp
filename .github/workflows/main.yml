@@ -7,10 +7,10 @@ jobs:
     strategy:
       matrix:
         node-version: [12, 14, 16, 18, 20, 22, 23]
-        platform: ['ubuntu', 'windows']
+        runner: ['ubuntu-latest', 'windows-latest', 'ubuntu-22.04-arm']
 
-    name: node ${{ matrix.node-version }} on ${{ matrix.platform }}
-    runs-on: ${{ matrix.platform }}-latest
+    name: node ${{ matrix.node-version }} on ${{ matrix.runner }}
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v4
 
@@ -25,12 +25,12 @@ jobs:
       - run: npm ci
 
       - name: Install webp (windows)
-        if: matrix.platform == 'windows'
+        if: startsWith(matrix.runner, 'windows')
         shell: pwsh
         run: .\bin\download_webp.ps1
 
       - name: Install webp
-        if: matrix.platform != 'windows'
+        if: startsWith(matrix.runner, 'ubuntu')
         run: sudo ./bin/install_webp
 
       - run: npm test
